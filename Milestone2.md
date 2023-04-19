@@ -9,3 +9,33 @@ The nodes in the central graph represent actors or directors, and when clicked, 
 
 The lines connecting the central graph nodes signify collaborations, and when clicked, they reveal detailed information about the movies they've worked on together, along with their posters.
 ![image_actor_to_actor_movie)](https://user-images.githubusercontent.com/61150130/233065691-c20f466b-2144-43fb-b3ab-9ee297abefe4.png)
+
+# Tools and Lecture 
+Creating a graph that links actors and directors:
+
+Tools: D3.js, D3.forceSimulation (for creating a force-directed graph)
+Lectures: D3.js, Graphs
+Displaying movie posters and data when a link is clicked:
+
+Tools: D3.js (for handling click events and updating the visualization), HTML/CSS (for designing the layout)
+Lectures: Interaction in D3.js, D3.js
+Filtering by genre:
+
+Tools: D3.js (for updating the visualization based on the selected genre), HTML/CSS (for designing buttons)
+Lectures: Interaction in D3.js, D3.js, Tabular Data
+Time cursor for filtering movies by date:
+
+Tools: D3.js (for creating a time slider and updating the visualization based on the selected date), HTML/CSS (for designing the time slider)
+Lectures: Interaction in D3.js, D3.js, Tabular Data
+Adding a search bar for actors and directors:
+
+Tools: D3.js (for filtering the graph based on user input), HTML/CSS (for designing the search bar)
+Lectures: Interaction in D3.js, D3.js
+Visual design and aesthetics:
+
+Tools: D3.js (for selecting colors and creating visual encodings), HTML/CSS (for designing the overall layout)
+Lectures: Perception Colors, Maps, Text Viz
+Storytelling with your visualization:
+
+Tools: D3.js (for creating interactive elements that guide users through the story)
+Lectures: Storytelling
