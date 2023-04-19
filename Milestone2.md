@@ -52,3 +52,33 @@ The lines connecting the central graph nodes signify collaborations, and when cl
     Tools: D3.js (for creating interactive elements that guide users through the story)
     
     Lectures: Storytelling
+
+# Break down of the Project into independent pieces to implement
+
+- Parse and preprocess the data:
+
+        Read in the list of movies, actors, and directors, and preprocess the data to create nodes and links.
+
+- Create a force-directed graph:
+
+        Use D3.js to create a graph with nodes for actors and directors, and links between them based on their collaboration in movies.
+
+- Implement interaction for displaying movie information:
+
+Add click event listeners to the links and display movie information, including posters, when a link is clicked.
+
+- Add filtering options for genre and date:
+
+Create buttons for filtering by genre and a time slider for filtering by date, and update the graph based on user selections.
+
+- Implement a search bar for actors and directors:
+
+Create an HTML input field for searching, add an event listener to handle user input, and filter the graph to show only the connections of the searched actor or director.
+
+- Apply visual design and aesthetics:
+
+Choose appropriate colors, fonts, and visual encodings for your visualization, and design the overall layout using HTML/CSS.
+
+- Incorporate storytelling elements:
+
+Add interactive elements that guide users through the story of the visualization, highlighting important connections and collaborations between actors and directors.
