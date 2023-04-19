@@ -1,6 +1,6 @@
 # Vizualisation sketches
 ## Principal feature: The Actor to Actor Star Graph
-In this data visualization project, we want a dynamic star graph centered around a specific actor, who was searched for using the search bar. Upon searching, the graph displays a network of interconnected nodes, each representing another actor the searched actor has worked with. Additional controls, such as genre filter buttons and a time cursor, allow users to refine their view of the graph based on movie genres or a specific time period. The interactive and visually appealing design of this star graph offers an intuitive way to explore the extensive career and collaborations of Robert De Niro.
+In this data visualization project, we want a dynamic star graph centered around a specific actor or director, who was searched for using the search bar. Upon searching, the graph displays a network of interconnected nodes, each representing another actor the searched actor has worked with. Additional controls, such as genre filter buttons and a time cursor, allow users to refine their view of the graph based on movie genres or a specific time period. The interactive and visually appealing design of this star graph offers an intuitive way to explore the extensive career and collaborations of any actor.
 ![Graph_image](https://user-images.githubusercontent.com/61150130/233065447-b95e6264-96e5-49e5-80c7-fbe8bcfb1502.png)
 
 ## Movies Interactive Informations
