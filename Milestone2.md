@@ -12,6 +12,7 @@ The lines connecting the central graph nodes signify collaborations, and when cl
 
 # Tools and Lecture 
 - Creating a graph that links actors and directors:
+- 
     Tools: D3.js, D3.forceSimulation (for creating a force-directed graph)
     Lectures: D3.js, Graphs
   
