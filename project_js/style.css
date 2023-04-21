@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+input, button {
+    font-size: 1rem;
+}
+
+#actor-input {
+    padding: 5px 10px;
+}
+
+#search-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+.wrapper {
+    display: flex;
+}
+
+#graph {
+    flex: 1;
+    width: 70%;
+    height: 800px;
+}
+
+#actor-info {
+    flex: 1;
+    width: 30%;
+    padding: 1em;
+    border-left: 1px solid #ccc;
+}

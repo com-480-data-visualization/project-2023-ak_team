@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+        }
+
+        #graph {
+            flex: 1;
+            width: 70%;
+        }
+
+        #actor-info {
+            flex: 1;
+            width: 30%;
+            padding: 1em;
+            border-left: 1px solid #ccc;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <input type="text" id="actor-input">
+    <button id="search-btn">Search</button>
+    <div class="wrapper">
+        <div id="graph"></div>
+        <div id="actor-info"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
