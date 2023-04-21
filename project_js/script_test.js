@@ -11,7 +11,7 @@ function updateActorSuggestions(actors) {
   }
   
   // Generate the actors list
-  const size = 10;
+  const size = 100;
   const actors = generateActorsList(size);
   updateActorSuggestions(actors);
   
@@ -131,7 +131,7 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
         .enter()
         .append("circle")
         .attr("r", 20)
-        .attr("fill", (d, i) => i === 0 ? "#ff0000" : "#1f77b4");
+        .attr("fill", (d) => d.name === actorName ? "#ff0000" : "#1f77b4");
 
     // Add the click event listener to each node
     nodes.each(function (d) {
@@ -238,16 +238,20 @@ function generateGraphData(actorName, actors, adjacencyMatrix) {
     for (let i = 0; i < actors.length; i++) {
         if (adjacencyMatrix[actorIndex][i] === 1 || i === actorIndex) {
             nodes.push({ name: actors[i] });
-
-            if (i !== actorIndex) {
-                links.push({
-                    source: nodes.find(node => node.name === actorName),
-                    target: nodes.find(node => node.name === actors[i]),
-                });
-            }
         }
     }
 
+    for (let i = 0; i < actors.length; i++) {
+        if (adjacencyMatrix[actorIndex][i] === 1 && i !== actorIndex) {
+            links.push({
+                source: nodes.find(node => node.name === actorName),
+                target: nodes.find(node => node.name === actors[i]),
+            });
+        }
+    }
+
+    console.log("Nodes: ", nodes)
+    console.log("Links: ", links)
     return {
         nodes: nodes,
         links: links,
