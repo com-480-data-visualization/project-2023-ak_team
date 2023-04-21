@@ -1,3 +1,112 @@
+
+
+const actorsPath = 'test_small_map_actors.json';
+const moviesPath = 'test_small_map_movies.json';
+const infoDictPath = 'test_small_sample.json'
+
+async function readActorsFile(filePath) {
+  try {
+    const response = await fetch(filePath);
+    const actors_map = await response.json();
+    return actors_map;
+  } catch (err) {
+    console.error('Error:', err);
+  }
+}
+async function readMoviesFile(filePath) {
+    try {
+      const response = await fetch(filePath);
+      const movies_map = await response.json();
+      return movies_map;
+    } catch (err) {
+      console.error('Error:', err);
+    }
+}
+
+async function readInfoDict(filePath) {
+    try {
+      const response = await fetch(filePath);
+      const infoDict = await response.json();
+      return infoDict;
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
+
+function processActorNames(actors_map) {
+    const actors_names = Object.keys(actors_map);
+    console.log(actors_names);
+    return actors_names;
+}
+
+
+  async function main() {
+    const actors_map = await readActorsFile(actorsPath);
+    const movies_map = await readMoviesFile(moviesPath);
+    const info_dict = await readInfoDict(infoDictPath);
+
+    const actors_names = processActorNames(actors_map);
+  
+    // Generate the actors list
+    updateActorSuggestions(actors_names);
+    
+    // Add an event listener for the input field
+    document.getElementById("actor-input").addEventListener("input", function () {
+        const input = this.value.trim().toLowerCase();
+    
+        // Filter the actors based on the input value
+        const matchingActors = actors_names.filter(actors_names => actors_names.toLowerCase().includes(input));
+        updateActorSuggestions(matchingActors);
+    });
+    
+    document.getElementById("search-btn").addEventListener("click", function () {
+        const actorName = document.getElementById("actor-input").value.trim(); //value entered in the search bar eg Brad Pitt
+        if (actorName) {
+
+            console.log("Actor searched: ", actorName)
+            const principal_actor_id = actors_map[actorName] // id of the actor searched --> int 
+            const info_actor = info_dict[principal_actor_id] // {played_with_actor1:[film id 1, film id 2, ..], ..., own_movies:[...]}
+            var related_actor_ids =  info_actor["Played_with_ids"].slice()// get the ids of the actors he plays with
+            related_actor_ids.unshift(principal_actor_id) // we also want the id of the principal actor
+            var related_actor_names = related_actor_ids.map(id => getNameById(id, actors_map)); // the actors names
+
+            const size = related_actor_names.length
+            console.log(info_actor)
+            console.log(related_actor_ids)
+            console.log(related_actor_names)
+            // Replace this with your adjacency matrix data
+            const adjacencyMatrix = generateAdjacencyMatrix(size);
+            console.table(adjacencyMatrix)
+            //const adjacencyMatrix = generateFixedAdjacencyMatrix(size);
+            // Replace this with your list of actor names
+            const actorsInfo = generateActorsInfo(size, related_actor_names, info_dict, actors_map, movies_map);
+            console.log(actorsInfo)
+            // Initialize shared movies matrix
+            const sharedMoviesMatrix = initializeSharedMoviesMatrix(size);
+        
+            drawGraph(actorName, related_actor_names, adjacencyMatrix, actorsInfo, sharedMoviesMatrix);
+        }
+    });
+}
+  
+function getNameById(id, nameIdMapping) {
+    for (const [name, idInMapping] of Object.entries(nameIdMapping)) {
+      if (idInMapping === id) {
+        return name;
+      }
+    }
+    return null; // return null if the ID is not found in the mapping
+  }
+
+  function getIdByName(name_input, nameIdMapping) {
+    for (const [name, id] of Object.entries(nameIdMapping)) {
+      if (name === name_input) {
+        return id;
+      }
+    }
+    return null; // return null if the ID is not found in the mapping
+  }
+
 // Add this function to your JavaScript code
 function updateActorSuggestions(actors) {
     const dataList = document.getElementById("actors-list");
@@ -9,38 +118,6 @@ function updateActorSuggestions(actors) {
       dataList.appendChild(option);
     });
   }
-  
-  // Generate the actors list
-  const size = 100;
-  const actors = generateActorsList(size);
-  updateActorSuggestions(actors);
-  
-  // Add an event listener for the input field
-  document.getElementById("actor-input").addEventListener("input", function () {
-    const input = this.value.trim().toLowerCase();
-  
-    // Filter the actors based on the input value
-    const matchingActors = actors.filter(actor => actor.toLowerCase().includes(input));
-    updateActorSuggestions(matchingActors);
-  });
-  
-  document.getElementById("search-btn").addEventListener("click", function () {
-    const actorName = document.getElementById("actor-input").value.trim();
-    if (actorName) {
-      // Replace this with your adjacency matrix data
-      const adjacencyMatrix = generateRandomAdjacencyMatrix(size);
-      console.table(adjacencyMatrix)
-      //const adjacencyMatrix = generateFixedAdjacencyMatrix(size);
-      // Replace this with your list of actor names
-      const actorsInfo = generateActorsInfo(size);
-  
-      // Initialize shared movies matrix
-      const sharedMoviesMatrix = initializeSharedMoviesMatrix(size);
-  
-      drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesMatrix);
-    }
-  });
-  
 
 function generateActorsList(size) {
     const actors = [];
@@ -50,29 +127,34 @@ function generateActorsList(size) {
     return actors;
 }
 
-function generateActorsInfo(size) {
+function generateActorsInfo(size, related_actor_names, info_dict, actors_map, movies_map) {
     const actorsInfo = {};
+    console.log("inside generate info")
     for (let i = 1; i <= size; i++) {
-        const actorName = "Actor " + i;
+        const actorName = related_actor_names[i];
+        const actorId = getIdByName(actorName, actors_map)
+        const Own_movies = ["Interstellar", "Inception"]
+
         actorsInfo[actorName] = {
-            age: 30,
-            listOfMovies: ["Inception", "Interstellar", "Shrek"]
+            name : actorName,
+            id : actorId,
+            listOfMovies: Own_movies
         };
     }
     return actorsInfo;
 }
 
-function generateRandomAdjacencyMatrix(size) {
+function generateAdjacencyMatrix(size) {
     const matrix = [];
     for (let i = 0; i < size; i++) {
         const row = [];
         for (let j = 0; j < size; j++) {
             // Don't create connections to self
-            if (i === j) {
-                row.push(0);
+            if (i == 0 || j == 0) {
+                row.push(1);
             } else {
                 // Generate a random value of either 0 or 1
-                row.push(Math.round(Math.random()));
+                row.push(0);
             }
 
         }
@@ -258,5 +340,6 @@ function generateGraphData(actorName, actors, adjacencyMatrix) {
     };
 }
 
+main();
 
 
