@@ -2,7 +2,7 @@
 
 const actorsPath = 'test_small_map_actors.json';
 const moviesPath = 'test_small_map_movies.json';
-const infoDictPath = 'test_small_sample.json'
+const infoDictPath = 'test_big_sample.json'
 
 async function readActorsFile(filePath) {
   try {
@@ -48,7 +48,7 @@ function processActorNames(actors_map) {
     const actors_names = processActorNames(actors_map);
   
     // Generate the actors list
-    updateActorSuggestions(actors_names);
+    //updateActorSuggestions(actors_names);
     
     // Add an event listener for the input field
     document.getElementById("actor-input").addEventListener("input", function () {
@@ -64,8 +64,13 @@ function processActorNames(actors_map) {
         if (actorName) {
 
             console.log("Actor searched: ", actorName)
+
             const principal_actor_id = actors_map[actorName] // id of the actor searched --> int 
+            console.log("Actor id: ", principal_actor_id)
+
             const info_actor = info_dict[principal_actor_id] // {played_with_actor1:[film id 1, film id 2, ..], ..., own_movies:[...]}
+            console.log("Actor info: ", info_actor)
+
             var related_actor_ids =  info_actor["Played_with_ids"].slice()// get the ids of the actors he plays with
             related_actor_ids.unshift(principal_actor_id) // we also want the id of the principal actor
             var related_actor_names = related_actor_ids.map(id => getNameById(id, actors_map)); // the actors names
@@ -80,6 +85,8 @@ function processActorNames(actors_map) {
             // Initialize shared movies matrix
             const sharedMoviesMatrix = initializeSharedMoviesMatrix(size, related_actor_names, info_dict, actors_map, movies_map, principal_actor_id);
         
+
+            console.log("Related actors: ", related_actor_names)
             drawGraph(actorName, related_actor_names, adjacencyMatrix, actorsInfo, sharedMoviesMatrix);
         }
     });
