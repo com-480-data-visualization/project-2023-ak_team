@@ -71,18 +71,14 @@ function processActorNames(actors_map) {
             var related_actor_names = related_actor_ids.map(id => getNameById(id, actors_map)); // the actors names
 
             const size = related_actor_names.length
-            console.log(info_actor)
-            console.log(related_actor_ids)
-            console.log(related_actor_names)
+            
             // Replace this with your adjacency matrix data
             const adjacencyMatrix = generateAdjacencyMatrix(size);
-            console.table(adjacencyMatrix)
             //const adjacencyMatrix = generateFixedAdjacencyMatrix(size);
             // Replace this with your list of actor names
             const actorsInfo = generateActorsInfo(size, related_actor_names, info_dict, actors_map, movies_map);
-            console.log(actorsInfo)
             // Initialize shared movies matrix
-            const sharedMoviesMatrix = initializeSharedMoviesMatrix(size);
+            const sharedMoviesMatrix = initializeSharedMoviesMatrix(size, related_actor_names, info_dict, actors_map, movies_map, principal_actor_id);
         
             drawGraph(actorName, related_actor_names, adjacencyMatrix, actorsInfo, sharedMoviesMatrix);
         }
@@ -127,22 +123,6 @@ function generateActorsList(size) {
     return actors;
 }
 
-function generateActorsInfo(size, related_actor_names, info_dict, actors_map, movies_map) {
-    const actorsInfo = {};
-    console.log("inside generate info")
-    for (let i = 1; i <= size; i++) {
-        const actorName = related_actor_names[i];
-        const actorId = getIdByName(actorName, actors_map)
-        const Own_movies = ["Interstellar", "Inception"]
-
-        actorsInfo[actorName] = {
-            name : actorName,
-            id : actorId,
-            listOfMovies: Own_movies
-        };
-    }
-    return actorsInfo;
-}
 
 function generateAdjacencyMatrix(size) {
     const matrix = [];
@@ -167,6 +147,77 @@ function generateAdjacencyMatrix(size) {
         }
     } 
     return matrix;
+}
+function generateActorsInfo(size, related_actor_names, info_dict, actors_map, movies_map) {
+    const actorsInfo = {};
+
+    for (let i = 0; i <= size; i++) {
+        const actorName = related_actor_names[i];
+        const actorId = getIdByName(actorName, actors_map)
+        
+        const available_ids = Object.keys(info_dict)
+
+        if (actorId in available_ids){
+            var Own_movies = info_dict[actorId]["Own_movies"].map(m_id => getNameById(m_id, movies_map))
+        }
+        else{
+            var Own_movies = ["Inception", "Interstellar", "To be updated"]
+        }
+
+        actorsInfo[actorName] = {
+            name : actorName,
+            id : actorId,
+            listOfMovies: Own_movies
+        };
+    }
+    return actorsInfo;
+}
+
+function displayActorInfo(actorName, actorsInfo) {
+    const actor = actorsInfo[actorName];
+    if (actor) {
+        document.getElementById("actor-info").innerHTML = `
+            <h2>${actorName}</h2>
+            <p>Name: ${actor.name}</p>
+            <p>Id: ${actor.id}</p>
+            <p>Movies:</p>
+            <ul>
+                ${actor.listOfMovies.map(movie => `<li>${movie}</li>`).join('')}
+            </ul>
+        `;
+    }
+}
+
+function initializeSharedMoviesMatrix(size, related_actor_names, info_dict, actors_map, movies_map, principal_actor_id) {
+    const shared_matrix = [];
+
+
+    for (let i = 1; i < size; i++) {
+        const actorName = related_actor_names[i];
+        const actorId = getIdByName(actorName, actors_map)
+        //shared_movies = info_dict[principal_actor_id][i].map(m_id => getNameById(m_id, movies_map))
+        shared_movies = info_dict[principal_actor_id][actorId].map(m_id => getNameById(m_id, movies_map))
+        shared_matrix.push(shared_movies);
+        
+    }
+    shared_matrix.unshift([])
+    console.log("Shared matrix:", shared_matrix)
+    return shared_matrix;
+}
+
+function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
+    const index = actors.indexOf(actor2);
+
+    if (index !== -1) {
+        const sharedMovies = sharedMoviesMatrix[index];
+        document.getElementById("shared-movies-info").style.display = "block";
+        document.getElementById("shared-movies-info").innerHTML = `
+            <h3>Shared Movies (${actor1} and ${actor2}):</h3>
+            <ul>
+                ${sharedMovies.map(movie => `<li>${movie}</li>`).join('')}
+            </ul>
+        `;
+    }
 }
 
 
@@ -260,52 +311,6 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
 }
         
 
-function displayActorInfo(actorName, actorsInfo) {
-    const actor = actorsInfo[actorName];
-    if (actor) {
-        document.getElementById("actor-info").innerHTML = `
-            <h2>${actorName}</h2>
-            <p>Age: ${actor.age}</p>
-            <p>Movies:</p>
-            <ul>
-                ${actor.listOfMovies.map(movie => `<li>${movie}</li>`).join('')}
-            </ul>
-        `;
-    }
-}
-
-function initializeSharedMoviesMatrix(size) {
-    const matrix = [];
-    for (let i = 0; i < size; i++) {
-        const row = [];
-        for (let j = 0; j < size; j++) {
-            if (i === j) {
-                row.push([]);
-            } else {
-                row.push(["Shared Movie 1", "Shared Movie 2"]);
-            }
-        }
-        matrix.push(row);
-    }
-    return matrix;
-}
-
-
-function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
-    const index1 = actors.indexOf(actor1);
-    const index2 = actors.indexOf(actor2);
-
-    if (index1 !== -1 && index2 !== -1) {
-        const sharedMovies = sharedMoviesMatrix[index1][index2];
-        document.getElementById("shared-movies-info").style.display = "block";
-        document.getElementById("shared-movies-info").innerHTML = `
-            <h3>Shared Movies (${actor1} and ${actor2}):</h3>
-            <ul>
-                ${sharedMovies.map(movie => `<li>${movie}</li>`).join('')}
-            </ul>
-        `;
-    }
-}
 
 function generateGraphData(actorName, actors, adjacencyMatrix) {
     const actorIndex = actors.indexOf(actorName);
