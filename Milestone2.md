@@ -6,7 +6,7 @@ Upon searching (for exemple Brad Pitt in the picture below), the graph displays 
     
 ![image](https://user-images.githubusercontent.com/61150130/234244159-8c7fad11-1dda-4616-92a0-cc52cd813132.png)
     
-The nodes in the graph represent either actors or directors. When a node is clicked, it reveals a comprehensive list of movies that the selected individual has participated in. Additionally, if the selected individual is not the central node, the system also displays a list of movies in which both the selected individual and the central actor have acted together.
+The nodes in the graph represent either actors or directors. When a node is clicked, it reveals a comprehensive list of movies that the selected individual has participated in. Additionally, if the selected individual is not the central node, the system also displays a list of movies in which both the selected individual and the central actor have acted together. 
 
 ## Actors Interactive Informations
 
