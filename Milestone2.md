@@ -29,7 +29,7 @@ The radar chart not only displays all the genres that the actor has been associa
     
     Lectures: D3.js, Graphs
   
-- Displaying movie posters and data when a link is clicked:
+- Displaying movie posters and data when a node is clicked:
 
     Tools: D3.js (for handling click events and updating the visualization), HTML/CSS (for designing the layout)
     
