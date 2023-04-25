@@ -6,10 +6,16 @@ Upon searching (for exemple Brad Pitt in the picture below), the graph displays 
     
 ![image](https://user-images.githubusercontent.com/61150130/234244159-8c7fad11-1dda-4616-92a0-cc52cd813132.png)
     
-The nodes in the graph represent either actors or directors. When a node is clicked, it reveals a comprehensive list of movies that the selected individual has participated in. Additionally, if the selected individual is not the central node, the system also displays a list of movies in which both the selected individual and the central actor have acted together. 
+The nodes in the graph represent either actors or directors. When a node is clicked, it reveals a comprehensive list of movies that the selected individual has participated in. Additionally, if the selected individual (like in this exemple Tom Cruise) is not the central node, the system also displays a list of movies in which both the selected individual and the central actor have acted together. 
 
 ## Actors Interactive Informations
 
+Afterwards, by clicking on the actor's name located at the top right corner (e.g., Tom Cruise), you can access further details about them, including:
+
+- A catalogue of movie posters and relevant information for all the movies they have acted in.
+- A radar chart showcasing the types of genres that have defined his/her career.
+- A density plot that depicts the distribution of genres in the movies he/she has acted in over time
+ 
 ![image](https://user-images.githubusercontent.com/61150130/234244230-2b6752bb-3a6f-49dc-9b45-fab073e90ebe.png)
 
 The lines connecting the central graph nodes signify collaborations, and when clicked, they reveal detailed information about the movies they've worked on together, along with their posters.
