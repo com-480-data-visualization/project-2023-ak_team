@@ -21,6 +21,8 @@ Afterwards, by clicking on the actor's name located at the top right corner (e.g
 The radar chart not only displays all the genres that the actor has been associated with but also serves as a filter button. You can select any of the genres (e.g., "Action") by clicking on it, and the movie poster catalogue will be filtered based on that genre (here you can see that "Rain Man" was removed and a new action movie was depicted). Furthermore, the density plot will highlight the selected genre, allowing you to view the distribution of that genre in the actor's career.
    
 ![image](https://user-images.githubusercontent.com/61150130/234244297-c293c240-cb87-4093-bcfc-81ba3674b629.png)
+     
+We also want that when you hover your cursor over a movie in the catalogue, all other images will become blurry, and detailed information about the movie will appear on the right side of the movie poster. The information about the movie, including Language, Runtime, Release Date, Actors, Writer, Director, Genre, IMDb Rating, Box Office, Rated, and Awards, will be displayed one after the other on the right side of the movie poster when you hover your cursor over it.
 
 # Tools and Lecture 
 - Creating a graph that links actors and directors:
