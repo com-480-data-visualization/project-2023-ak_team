@@ -3,7 +3,7 @@
 In this data visualization project, we want a dynamic star graph centered around a specific actor or director, who was searched for using the search bar. 
 Upon searching (for exemple Brad Pitt in the picture below), the graph displays a network of interconnected nodes, each representing another actor the searched actor has worked with. Additional controls, such as genre filter buttons and a time cursor, allow users to refine their view of the graph based on movie genres or a specific time period. The interactive and visually appealing design of this star graph offers an intuitive way to explore the extensive career and collaborations of any actor.
 
-
+    
 ![image](https://user-images.githubusercontent.com/61150130/234244159-8c7fad11-1dda-4616-92a0-cc52cd813132.png)
 The nodes in the central graph represent actors or directors, and when clicked, they display a comprehensive list of movies that the selected individual has been a part of.
 
