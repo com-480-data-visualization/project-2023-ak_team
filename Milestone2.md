@@ -12,13 +12,14 @@ The nodes in the graph represent either actors or directors. When a node is clic
 
 Afterwards, by clicking on the actor's name located at the top right corner (e.g., Tom Cruise), you can access further details about them, including:
 
-- A catalogue of movie posters and relevant information for all the movies they have acted in.
+- A catalogue of movie posters and relevant information for all the movies he/she has acted in.
 - A radar chart showcasing the types of genres that have defined his/her career.
 - A density plot that depicts the distribution of genres in the movies he/she has acted in over time
- 
+    
 ![image](https://user-images.githubusercontent.com/61150130/234244230-2b6752bb-3a6f-49dc-9b45-fab073e90ebe.png)
-
-The lines connecting the central graph nodes signify collaborations, and when clicked, they reveal detailed information about the movies they've worked on together, along with their posters.
+   
+The radar chart not only displays all the genres that the actor has been associated with but also serves as a filter button. You can select any of the genres (e.g., "Action") by clicking on it, and the movie poster catalogue will be filtered based on that genre. Furthermore, the density plot will highlight the selected genre, allowing you to view the distribution of that genre in the actor's career.
+   
 ![image](https://user-images.githubusercontent.com/61150130/234244297-c293c240-cb87-4093-bcfc-81ba3674b629.png)
 
 # Tools and Lecture 
