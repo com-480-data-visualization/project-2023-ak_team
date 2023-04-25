@@ -100,7 +100,7 @@ We also want that when you hover your cursor over a movie in the catalogue, all 
  # Extra Ideas
  
 Additionally, some more creative and challenging features could be:
-
+  
 - Visually highlight connections between actors who have worked together in a movie that has either won or been nominated for an Oscar.
 Use a gold link to represent a movie that has won an Oscar, and a silver link to indicate a movie that has been nominated for an Oscar.
 Incorporate a feature that allows users to filter the movie catalogue by the decade in which the movie was released, giving a historical perspective on the actor's career.
