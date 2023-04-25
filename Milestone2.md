@@ -1,10 +1,15 @@
 # Vizualisation sketches
 ## Principal feature: The Actor to Actor Star Graph
-In this data visualization project, we want a dynamic star graph centered around a specific actor or director, who was searched for using the search bar. Upon searching, the graph displays a network of interconnected nodes, each representing another actor the searched actor has worked with. Additional controls, such as genre filter buttons and a time cursor, allow users to refine their view of the graph based on movie genres or a specific time period. The interactive and visually appealing design of this star graph offers an intuitive way to explore the extensive career and collaborations of any actor.
-![image](https://user-images.githubusercontent.com/61150130/234244159-8c7fad11-1dda-4616-92a0-cc52cd813132.png)
+In this data visualization project, we want a dynamic star graph centered around a specific actor or director, who was searched for using the search bar. 
+Upon searching (for exemple Brad Pitt in the picture below), the graph displays a network of interconnected nodes, each representing another actor the searched actor has worked with. Additional controls, such as genre filter buttons and a time cursor, allow users to refine their view of the graph based on movie genres or a specific time period. The interactive and visually appealing design of this star graph offers an intuitive way to explore the extensive career and collaborations of any actor.
 
-## Movies Interactive Informations
-The nodes in the central graph represent actors or directors, and when clicked, they display a comprehensive list of movies that the selected individual has been a part of, along with the respective movie posters. This feature allows users to easily explore the filmography of each actor or director in the network and discover new movies within their area of interest. The combination of these interactive elements makes the graph an engaging and informative tool for users to dive deep into the world of cinema and its many collaborations.
+
+![image](https://user-images.githubusercontent.com/61150130/234244159-8c7fad11-1dda-4616-92a0-cc52cd813132.png)
+The nodes in the central graph represent actors or directors, and when clicked, they display a comprehensive list of movies that the selected individual has been a part of.
+
+
+## Actors Interactive Informations
+
 ![image](https://user-images.githubusercontent.com/61150130/234244230-2b6752bb-3a6f-49dc-9b45-fab073e90ebe.png)
 
 The lines connecting the central graph nodes signify collaborations, and when clicked, they reveal detailed information about the movies they've worked on together, along with their posters.
