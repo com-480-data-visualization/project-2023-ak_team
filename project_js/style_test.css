@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -35,10 +36,11 @@ input, button {
     background-color: #45a049;
 }
 
-.wrapper {
+.wrapper1 {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: 20px; /* Add some space between the radar chart and the timeline chart */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     background-color: #ffffff;
     border-radius: 4px;
@@ -82,3 +84,35 @@ ul {
     list-style-type: none;
     padding-left: 0;
 }
+
+.chart-svg {
+    width: 100%;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: auto;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.radar-chart {
+    max-width: 60%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.timeline-chart {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.movie-chart {
+    max-width: 100%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
