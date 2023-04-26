@@ -178,6 +178,7 @@ function getNameById(id, nameIdMapping) {
 
         if (actorId in available_ids){
             var Own_movies_ids = info_dict[actorId]["Own_movies"];
+            var Own_movies_title = info_dict[actorId]["Own_movies"].map(m_id => getNameById(m_id, movies_map));
         }
         else{
             // Convert the hardcoded movie titles to movie IDs using movies_map
@@ -190,11 +191,12 @@ function getNameById(id, nameIdMapping) {
                 listOfMovies[movie_id] = movie_info_map[movie_id];
             }
         });
-        console.log("listOfMovies",listOfMovies)
+
         actorsInfo[actorName] = {
             name: actorName,
             id: actorId,
-            listOfMovies: listOfMovies
+            listOfMovies: listOfMovies,
+            movie_title: Own_movies_title
         };
     }
     return actorsInfo;
@@ -222,7 +224,7 @@ function displayActorInfo(actorName, actorsInfo) {
             <p>Age: ${actor.age}</p>
             <p>Movies:</p>
             <ul>
-                ${Object.entries(actor.listOfMovies).map(([title, _]) => `<li>${title}</li>`).join('')}
+                ${actor.movie_title.map(title => `<li>${title.replace(/^\d+,\s*/g, '')}</li>`).join('')}
             </ul>
         `;
 
@@ -255,7 +257,7 @@ function displayActorInfo(actorName, actorsInfo) {
 
         for (const movie of Object.values(actor.listOfMovies)) {
             const imgElement = document.createElement("img");
-            imgElement.src = "movie_images/" + movie.image;
+            imgElement.src = "movie_poster_per_year/" + movie.date + "/" + movie.image;
             imgElement.alt = movie.title;
             imgElement.style.width = "150px";
             imgElement.style.height = "230px";
@@ -305,7 +307,7 @@ function drawRadarChart(genreCounts) {
             scales: {
                 r: {
                     min: 0,                    
-                    max: maxValue, // Set the maximum value for the radial scale
+                    max: maxValue+1, // Set the maximum value for the radial scale
                     beginAtZero: true,
                     angleLines: {
                         display: false // Hides the labels around the radar chart
@@ -568,10 +570,12 @@ function filterMovieCovers(movies, selectedGenres) {
     for (let img of images) {
         const movieTitle = img.src.slice(-13);
         const movie = Object.values(movies).find(movie => movie.image === movieTitle);
-        
+
         // Check if the movie belongs to any of the selected genres
         const movieInSelectedGenres = movie.genres.some(genre => selectedGenres.includes(genre));
-        img.style.display = movieInSelectedGenres ? "inline-block" : "none";
+
+        // If no genres are selected or the movie belongs to a selected genre, display the movie poster
+        img.style.display = (selectedGenres.length === 0 || movieInSelectedGenres) ? "inline-block" : "none";
     }
 }
 
@@ -593,7 +597,7 @@ function generateRandomAdjacencyMatrix(size) {
     return matrix;
   }
 
-function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo) {
+function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo,sharedMoviesMatrix) {
     const graphData = generateGraphData(actorName, actors, adjacencyMatrix);
 
     if (!graphData) {
@@ -635,6 +639,13 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo) {
         });
     });
 
+    links.each(function (d) {
+        this.addEventListener("click", function () {
+            console.log("Clicked link:", d.source.name, d.target.name);
+            displaySharedMoviesInfo(d.source.name, d.target.name, sharedMoviesMatrix, actors);
+        });
+    });
+
     // Add actor names as labels
     const labels = svg.selectAll("text")
         .data(graphData.nodes)
@@ -663,7 +674,20 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo) {
         labels.attr("x", d => d.x).attr("y", d => d.y);
     }
 }
+function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
+    const index = actors.indexOf(actor2);
 
+    if (index !== -1) {
+        const sharedMovies = sharedMoviesMatrix[index];
+        document.getElementById("shared-movies-info").style.display = "block";
+        document.getElementById("shared-movies-info").innerHTML = `
+            <h3>Shared Movies (${actor1} and ${actor2}):</h3>
+            <ul>
+                ${sharedMovies.map(movie => `<li>${movie}</li>`).join('')}
+            </ul>
+        `;
+    }
+}
 
 function generateGraphData(actorName, actors, adjacencyMatrix) {
     const actorIndex = actors.indexOf(actorName);
