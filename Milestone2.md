@@ -1,14 +1,28 @@
 # Vizualisation sketches
 ## Principal feature: The Actor to Actor Star Graph
-In this data visualization project, we want a dynamic star graph centered around a specific actor or director, who was searched for using the search bar. Upon searching, the graph displays a network of interconnected nodes, each representing another actor the searched actor has worked with. Additional controls, such as genre filter buttons and a time cursor, allow users to refine their view of the graph based on movie genres or a specific time period. The interactive and visually appealing design of this star graph offers an intuitive way to explore the extensive career and collaborations of any actor.
-![Graph_image](https://user-images.githubusercontent.com/61150130/233065447-b95e6264-96e5-49e5-80c7-fbe8bcfb1502.png)
+In this data visualization project, we want a dynamic star graph centered around a specific actor or director, who was searched for using the search bar. 
+Upon searching (for exemple Brad Pitt in the picture below), the graph displays a network of interconnected nodes, each representing another actor the searched actor has worked with. Additional controls, such as genre filter buttons and a time cursor, allow users to refine their view of the graph based on movie genres or a specific time period. The interactive and visually appealing design of this star graph offers an intuitive way to explore the extensive career and collaborations of any actor.
 
-## Movies Interactive Informations
-The nodes in the central graph represent actors or directors, and when clicked, they display a comprehensive list of movies that the selected individual has been a part of, along with the respective movie posters. This feature allows users to easily explore the filmography of each actor or director in the network and discover new movies within their area of interest. The combination of these interactive elements makes the graph an engaging and informative tool for users to dive deep into the world of cinema and its many collaborations.
-![image_actor_movie)](https://user-images.githubusercontent.com/61150130/233065672-14bd4e4b-b425-45d0-8711-e556064249e2.png)
+    
+![image](https://user-images.githubusercontent.com/61150130/234244159-8c7fad11-1dda-4616-92a0-cc52cd813132.png)
+    
+The nodes in the graph represent either actors or directors. When a node is clicked, it reveals a comprehensive list of movies that the selected individual has participated in. Additionally, if the selected individual (like in this exemple Tom Cruise) is not the central node, the system also displays a list of movies in which both the selected individual and the central actor have acted together. 
 
-The lines connecting the central graph nodes signify collaborations, and when clicked, they reveal detailed information about the movies they've worked on together, along with their posters.
-![image_actor_to_actor_movie)](https://user-images.githubusercontent.com/61150130/233065691-c20f466b-2144-43fb-b3ab-9ee297abefe4.png)
+## Actors Interactive Informations
+
+Afterwards, by clicking on the actor's name located at the top right corner (e.g., Tom Cruise), you can access further details about them, including:
+
+- A catalogue of movie posters and relevant information for all the movies he/she has acted in.
+- A radar chart showcasing the types of genres that have defined his/her career.
+- A density plot that depicts the distribution of genres in the movies he/she has acted in over time
+    
+![image](https://user-images.githubusercontent.com/61150130/234244230-2b6752bb-3a6f-49dc-9b45-fab073e90ebe.png)
+   
+The radar chart not only displays all the genres that the actor has been associated with but also serves as a filter button. You can select any of the genres (e.g., "Action") by clicking on it, and the movie poster catalogue will be filtered based on that genre (here you can see that "Rain Man" was removed and a new action movie was depicted). Furthermore, the density plot will highlight the selected genre, allowing you to view the distribution of that genre in the actor's career.
+   
+![image](https://user-images.githubusercontent.com/61150130/234244297-c293c240-cb87-4093-bcfc-81ba3674b629.png)
+     
+We also want that when you hover your cursor over a movie in the catalogue, all other images will become blurry, and detailed information about the movie will appear on the right side of the movie poster. The information about the movie, including Language, Runtime, Release Date, Actors, Writer, Director, Genre, IMDb Rating, Box Office, Rated, and Awards, will be displayed one after the other on the right side of the movie poster when you hover your cursor over it.
 
 # Tools and Lecture 
 - Creating a graph that links actors and directors:
@@ -17,7 +31,7 @@ The lines connecting the central graph nodes signify collaborations, and when cl
     
     Lectures: D3.js, Graphs
   
-- Displaying movie posters and data when a link is clicked:
+- Displaying movie posters and data when a node is clicked:
 
     Tools: D3.js (for handling click events and updating the visualization), HTML/CSS (for designing the layout)
     
@@ -82,3 +96,17 @@ The lines connecting the central graph nodes signify collaborations, and when cl
 - Incorporate storytelling elements:
 
     Add interactive elements that guide users through the story of the visualization, highlighting important connections and collaborations between actors and              directors.
+    
+ # Extra Ideas
+ 
+Additionally, some more creative and challenging features could be:
+  
+- Visually highlight connections between actors who have worked together in a movie that has either won or been nominated for an Oscar.
+Use a gold link to represent a movie that has won an Oscar, and a silver link to indicate a movie that has been nominated for an Oscar.
+Use something similar for other presitigious awards like Golden Globes or "La Palme d'Or" of Cannes.
+- Allow users to compare the career trajectories of two or more actors, displaying their respective movie catalogues side by side.
+- Incorporate a feature that shows the actor's connections to other industries, such as their involvement in theater or television.
+- Use natural language processing to extract themes and motifs from movie summaries and reviews.
+Visually display these themes and motifs as word clouds.
+
+These features may not be crucial to the overall meaning of the project, but they could enhance the visualization and provide users with a more immersive experience.
