@@ -10,7 +10,7 @@ The nodes in the graph represent either actors or directors. When a node is clic
 
 ## Actors Interactive Informations
 
-Afterwards, by clicking on the actor's name located at the top right corner (e.g., Tom Cruise), you can access further details about them, including:
+Afterwards, by clicking on an actor's node on the grap , you can access further details about them, including:
 
 - A catalogue of movie posters and relevant information for all the movies he/she has acted in.
 - A radar chart showcasing the types of genres that have defined his/her career.
@@ -18,11 +18,11 @@ Afterwards, by clicking on the actor's name located at the top right corner (e.g
     
 ![image](https://user-images.githubusercontent.com/61150130/234244230-2b6752bb-3a6f-49dc-9b45-fab073e90ebe.png)
    
-The radar chart not only displays all the genres that the actor has been associated with but also serves as a filter button. You can select any of the genres (e.g., "Action") by clicking on it, and the movie poster catalogue will be filtered based on that genre (here you can see that "Rain Man" was removed and a new action movie was depicted). Furthermore, the density plot will highlight the selected genre, allowing you to view the distribution of that genre in the actor's career.
+The density not only displays all the genres that the actor has been associated with but also serves as a filter button. Using the legend of the plot you can select any of the genres (e.g., "Action") by clicking on it, and the movie poster catalogue will be filtered based on that genre (here you can see that "Rain Man" was removed and a new action movie was depicted). Furthermore, the density plot will highlight the selected genre, allowing you to view the distribution of that genre in the actor's career.
    
 ![image](https://user-images.githubusercontent.com/61150130/234244297-c293c240-cb87-4093-bcfc-81ba3674b629.png)
      
-We also want that when you hover your cursor over a movie in the catalogue, all other images will become blurry, and detailed information about the movie will appear on the right side of the movie poster. The information about the movie, including Language, Runtime, Release Date, Actors, Writer, Director, Genre, IMDb Rating, Box Office, Rated, and Awards, will be displayed one after the other on the right side of the movie poster when you hover your cursor over it.
+We also want that when you click on a movie in the catalogue to display interesting informations about the movie like the Language, Runtime, Release Date, Writer, Director, IMDb Rating, Box Office, Rated, and Awards
 
 # Tools and Lecture 
 - Creating a graph that links actors and directors:
@@ -79,7 +79,7 @@ We also want that when you hover your cursor over a movie in the catalogue, all 
 
 - Implement interaction for displaying movie information:
 
-    Add click event listeners to the links and display movie information, including posters, when a link is clicked.
+    Add click event listeners to the nodes and links in the graph to display corresponding information. When a node is clicked it should display the list of movies in which the actor has played. Under the graph should appear the movies covers and the graphs showing the genres in which the actor has participated in. 
 
 - Add filtering options for genre and date:
 
@@ -91,7 +91,7 @@ We also want that when you hover your cursor over a movie in the catalogue, all 
 
 - Apply visual design and aesthetics:
 
-    Choose appropriate colors, fonts, and visual encodings for your visualization, and design the overall layout using HTML/CSS.
+    Choose appropriate colors, fonts, and visual encodings for our visualization, and design the overall layout using HTML/CSS.
 
 - Incorporate storytelling elements:
 
@@ -101,6 +101,8 @@ We also want that when you hover your cursor over a movie in the catalogue, all 
  
 Additionally, some more creative and challenging features could be:
   
+- Implement an easier search tool when looking for an actor / director that could automatically filled the search bar by filtering the actors / directors matching the current search input.
+- Make the graph more interactive by being able to generate the graph of an actor directly by clicking on the node of an actor.
 - Visually highlight connections between actors who have worked together in a movie that has either won or been nominated for an Oscar.
 Use a gold link to represent a movie that has won an Oscar, and a silver link to indicate a movie that has been nominated for an Oscar.
 Use something similar for other presitigious awards like Golden Globes or "La Palme d'Or" of Cannes.
@@ -115,4 +117,4 @@ These features may not be crucial to the overall meaning of the project, but the
 
 To see our javascript code: [Javascript Code](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2_js)
 
-To start the project, you need to search for actors in the search bar. The search bar should be used to find actor names in the form "Actor i" where i is a number between 1 to 10. All actors have played in the same movies for now, so searching for any of them will provide you with relevant information. Once you have found an actor, click on their node to access their information. You can scroll down the page to view the three graphs that have been mentioned for that particular actor. Additionally, by clicking on a movie poster, you can view more information about that movie. Remember to use the search bar to find the desired actors, and click on any nodes or movie posters to explore further information.
+To start the project, you need to search for actors in the search bar. For now we have only a example of the final product so the actors you can search for are named Actor 1, Actor 2... and are all associated with fake informations and random movies. Once you have found an actor, click on their node to access their information. You can scroll down the page to view the three graphs that have been mentioned for that particular actor. Additionally, by clicking on a movie poster, you can view more information about that movie. Again the informations about the movies are not relevant and does not correspond to the actual movie. Remember to use the search bar to find the desired actors, and click on any nodes or movie posters to explore further information.
