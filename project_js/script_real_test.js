@@ -90,7 +90,8 @@ async function main() {
             const sharedMoviesMatrix = initializeSharedMoviesMatrix(size, related_actor_names, info_dict, actors_map, movies_map, principal_actor_id);
         
             drawGraph(actorName, related_actor_names, adjacencyMatrix, actorsInfo, sharedMoviesMatrix);
-            
+            displayActorInfo(actorName, actorsInfo);
+
         }
     });
     const timelineChartElement = document.getElementById("timeline-chart");
