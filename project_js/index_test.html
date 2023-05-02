@@ -1,46 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actor Connections</title>
+    <title>Graph</title>
     <link rel="stylesheet" href="style_test.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
     <div id="content">
-        <input type="text" id="actor-input" placeholder="Enter actor name">
-        <button id="search-btn">Search</button>
-        <div class="wrapper1">
-            <div id="graph"></div>
-            <div id="info">
-                <div id="actor-info" class="box"></div>
-                <div id="shared-movies-info" class="box"></div>
-            </div>
-        </div>
-        <div class="wrapper1">
-            <div id="radar-chart-section" class="chart-container" style="display:none;">
-                <h3>Genre Distribution</h3>
-                <div id="radar-chart" class="radar-chart"></div>
-            </div>
-            <div id="timeline-chart-section" class="chart-container" style="display:none;">
-                <h3>Timeline of Movies</h3>
-                <div id="timeline-chart" class="timeline-chart"></div>
-            </div>
-        </div>
-        <div class="wrapper1">
-            <div id="movie-images-container" class = chart-container style="display:none;">
-                <h3>Movie's covers</h3>
-                <div id="movie-chart" class="movie-chart"></div>
-            </div>
-        </div>
+        <input list="actors-list" id="actor-input" type="text" placeholder="Search for an actor" />
+        <datalist id="actors-list"></datalist>
         
+        <button id="search-btn">Search</button>
     </div>
+    <div class="wrapper">
+        <div id="graph"></div>
+        <div id="info">
+            <div id="actor-info"></div>
+            <div id="shared-movies-info" style="display:none;"></div>
+        </div>
+    </div>
+
     <script src="script_test.js"></script>
-    <script>
-        main();
-    </script>
 </body>
 </html>
