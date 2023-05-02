@@ -114,3 +114,5 @@ These features may not be crucial to the overall meaning of the project, but the
 # Javascript Skeleton of the Project
 
 To see our javascript code: [Javascript Code](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2_js)
+
+To start the project, you need to search for actors in the search bar. The search bar should be used to find actor names in the form "Actor i," where i is a number between 1 to 10. All actors have played in the same movies for now, so searching for any of them will provide you with relevant information. Once you have found an actor, click on their node to access their information. You can scroll down the page to view the three graphs that have been mentioned for that particular actor. Additionally, by clicking on a movie poster, you can view more information about that movie. Remember to use the search bar to find the desired actors, and click on any nodes or movie posters to explore further information.
