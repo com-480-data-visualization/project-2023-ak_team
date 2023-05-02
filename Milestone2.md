@@ -111,4 +111,4 @@ Visually display these themes and motifs as word clouds.
 
 These features may not be crucial to the overall meaning of the project, but they could enhance the visualization and provide users with a more immersive experience.
 
-To see our javascript code: https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2_js
+To see our javascript code: [Javascript Code]https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2_js
