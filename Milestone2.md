@@ -73,60 +73,60 @@ To achieve our goal, we can break down the project into the following independen
 
 - Data preprocessing and formatting:
 
-Process and format the data into a structure that is suitable for visualization.
-Extract actors, directors, movies, and genres as separate entities.
-Establish relationships between actors, directors, movies, and genres.
+    Process and format the data into a structure that is suitable for visualization.
+    Extract actors, directors, movies, and genres as separate entities.
+    Establish relationships between actors, directors, movies, and genres.
 
 - Implement the search bar:
 
-Create an input field for users to type in the search query (actor/director name).
-Implement a search functionality that filters actors/directors based on the input.
+    Create an input field for users to type in the search query (actor/director name).
+    Implement a search functionality that filters actors/directors based on the input.
 
 
 - Create a central graph visualization:
 
-Use a suitable library like D3.js, Sigma.js, or Vis.js to create the graph.
-Display the search result (actor/director) as the central node.
-Connect the central node to related actors and directors based on the movies they have worked on together.
+    Use a suitable library like D3.js, Sigma.js, or Vis.js to create the graph.
+    Display the search result (actor/director) as the central node.
+    Connect the central node to related actors and directors based on the movies they have worked on together.
 
 
 - Implement node selection and movie details display:
 
-Add an event listener for node clicks.
-When a node is clicked, display the movie titles and posters associated with the selected actor.
+    Add an event listener for node clicks.
+    When a node is clicked, display the movie titles and posters associated with the selected actor.
 
 
 - Create radar chart and density plot:
 
-Use a library like Chart.js or D3.js to create the radar chart for movie genres.
-Create a density plot for the selected actor's movie genres over time.
-Update both visualizations when a different node is clicked.
+    Use a library like Chart.js or D3.js to create the radar chart for movie genres.
+    Create a density plot for the selected actor's movie genres over time.
+    Update both visualizations when a different node is clicked.
 
 
 - Implement the genre filter:
 
-Create a dropdown or checkboxes to allow users to select a specific genre.
-When a genre is selected, filter the movie posters displayed based on the chosen genre.
-Update the density plot to highlight the selected genre.
+    Create a dropdown or checkboxes to allow users to select a specific genre.
+    When a genre is selected, filter the movie posters displayed based on the chosen genre.
+    Update the density plot to highlight the selected genre.
 
 
 - Implement the actor/director switch button:
 
-Create a toggle button to switch between searching for actors and directors.
-Update the search functionality and graph visualization accordingly when the button is toggled.
+    Create a toggle button to switch between searching for actors and directors.
+    Update the search functionality and graph visualization accordingly when the button is toggled.
 
 
 Integrate all the components:
 
-Combine all the above pieces to create a cohesive, interactive data visualization application.
-Ensure smooth user interaction and transition between different components.
+    Combine all the above pieces to create a cohesive, interactive data visualization application.
+    Ensure smooth user interaction and transition between different components.
 
 
 Testing and polishing:
 
-Test the application to ensure all features work as expected.
-Optimize performance and fix any bugs that arise.
-Make any necessary adjustments to improve the user experience.
+    Test the application to ensure all features work as expected.
+    Optimize performance and fix any bugs that arise.
+    Make any necessary adjustments to improve the user experience.
 
 
  # Extra Ideas
