@@ -76,6 +76,8 @@ To achieve our goal, we can break down the project into the following independen
     Process and format the data into a structure that is suitable for visualization.
     Extract actors, directors, movies, and genres as separate entities.
     Establish relationships between actors, directors, movies, and genres.
+    In this case we are gonna create dictionnaries for each of the data quoted before to link them together for exemple a dictionnary for actors-to-actor graph with
+    keys being the id of the actors and the value the id of actors they played with.
 
 - Implement the search bar:
 
@@ -85,7 +87,6 @@ To achieve our goal, we can break down the project into the following independen
 
 - Create a central graph visualization:
 
-    Use a suitable library like D3.js, Sigma.js, or Vis.js to create the graph.
     Display the search result (actor/director) as the central node.
     Connect the central node to related actors and directors based on the movies they have worked on together.
 
@@ -98,7 +99,6 @@ To achieve our goal, we can break down the project into the following independen
 
 - Create radar chart and density plot:
 
-    Use a library like Chart.js or D3.js to create the radar chart for movie genres.
     Create a density plot for the selected actor's movie genres over time.
     Update both visualizations when a different node is clicked.
 
