@@ -25,7 +25,7 @@ The density not only displays all the genres that the actor has been associated 
 We also want that when you click on a movie in the catalogue to display interesting informations about the movie like the Language, Runtime, Release Date, Writer, Director, IMDb Rating, Box Office, Rated, and Awards
 
 # Tools and Lecture 
-- Creating a graph that links actors and directors:
+- Creating a graph that links actors and directors based on an adjacency matrix:
 
     Tools: D3.js, D3.forceSimulation (for creating a force-directed graph)
     
@@ -43,11 +43,6 @@ We also want that when you click on a movie in the catalogue to display interest
     
     Lectures: Interaction in D3.js, D3.js, Tabular Data
 
-- Time cursor for filtering movies by date:
-
-    Tools: D3.js (for creating a time slider and updating the visualization based on the selected date), HTML/CSS (for designing the time slider)
-    
-    Lectures: Interaction in D3.js, D3.js, Tabular Data
 
 - Adding a search bar for actors and directors:
 
@@ -60,12 +55,21 @@ We also want that when you click on a movie in the catalogue to display interest
     Tools: D3.js (for selecting colors and creating visual encodings), HTML/CSS (for designing the overall layout)
     
     Lectures: Perception Colors, Maps, Text Viz
-
-- Storytelling with your visualization:
-
-    Tools: D3.js (for creating interactive elements that guide users through the story)
     
-    Lectures: Storytelling
+    
+- Radar chart of genres:    
+    
+    Tools: Chart.js
+    
+    Lectures: Tabular data
+    
+- Distribution plot of the genres:
+
+    Tools: Chart.js, D3.js
+    
+    Lectures: Perception Colors, Interaction in D3.js, D3.js
+
+
 
 # Break down of the Project into independent pieces to implement
 
