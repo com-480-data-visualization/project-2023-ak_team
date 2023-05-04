@@ -106,7 +106,7 @@ Additionally, some more creative and challenging features could be:
 - Visually highlight connections between actors who have worked together in a movie that has either won or been nominated for an Oscar.
 Use a gold link to represent a movie that has won an Oscar, and a silver link to indicate a movie that has been nominated for an Oscar.
 Use something similar for other presitigious awards like Golden Globes or "La Palme d'Or" of Cannes.
-- Allow users to compare the career trajectories of two or more actors, displaying their respective movie catalogues side by side.
+- Allow users to compare the career trajectories of two or more actors, displaying their respective movie catalogues side by side. This could allow users to see popularity of actors known for having been in competition with each other, one can think of sylvester stallone and arnold schwarzenegger who during 1970-1985 competed to see who was the greatest action movie actor. 
 - Incorporate a feature that shows the actor's connections to other industries, such as their involvement in theater or television.
 - Use natural language processing to extract themes and motifs from movie summaries and reviews.
 Visually display these themes and motifs as word clouds.
