@@ -130,7 +130,7 @@ To achieve our goal, we can break down the project into the following independen
 
 
  # Extra Ideas
- 
+  
 Additionally, some more creative and challenging features could be:
   
 - Implement an easier search tool when looking for an actor / director that could automatically filled the search bar by filtering the actors / directors matching the current search input.
