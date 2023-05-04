@@ -116,13 +116,13 @@ To achieve our goal, we can break down the project into the following independen
     Update the search functionality and graph visualization accordingly when the button is toggled.
 
 
-Integrate all the components:
+- Integrate all the components:
 
     Combine all the above pieces to create a cohesive, interactive data visualization application.
     Ensure smooth user interaction and transition between different components.
 
 
-Testing and polishing:
+- Testing and polishing:
 
     Test the application to ensure all features work as expected.
     Optimize performance and fix any bugs that arise.
