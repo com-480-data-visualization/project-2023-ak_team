@@ -3,6 +3,7 @@ const directorsPath = 'map_directors.json';
 const moviesPath = 'map_movies.json';
 const infoDictPath = 'all_movies_sample.json'
 const moviesInfosPath = 'movie_info_map.json'
+const mostPopularActorPath = 'most_famous_actor.json'
 
 async function readDirectorsFile(filePath) {
     try {
@@ -67,57 +68,85 @@ function processActorNames(actors_map) {
     const actors_names = Object.keys(actors_map);
     return actors_names;
 }
+
+let maxNodes = 12; // Initial value
+
+// Set up event listener for the slider
+window.addEventListener('DOMContentLoaded', (event) => {
+    const slider = document.getElementById("node-slider");
+    const nodeCount = document.getElementById("node-count");
+
+    slider.addEventListener("change", function() {
+        maxNodes = this.value; // Update the maxNodes value
+        nodeCount.textContent = `Node count: ${maxNodes}`; // Display the current node count
+        main(); // Redraw the graph by calling the main function
+    });
+});
+
 async function main() {
-    const actors_map = await readActorsFile(actorsPath);
-    const directors_map = await readDirectorsFile(directorsPath);
-    const movies_map = await readMoviesFile(moviesPath);
-    const info_dict = await readInfoDict(infoDictPath);
-    const movies_info_map = await readMoviesInfosFile(moviesInfosPath)
+    const [actors_map, directors_map, movies_map, info_dict, movies_info_map, actorPopularityMap] = await Promise.all([
+        readActorsFile(actorsPath),
+        readDirectorsFile(directorsPath),
+        readMoviesFile(moviesPath),
+        readInfoDict(infoDictPath),
+        readMoviesInfosFile(moviesInfosPath),
+        readMoviesInfosFile(mostPopularActorPath)
+    ]);
 
     const actors_names = processActorNames(actors_map);
 
     const actorInput = document.getElementById("actor-input");
+    const searchBtn = document.getElementById("search-btn"); // Define searchBtn here
 
-    // Check if the input field already contains an actor's name
-    if (!actorInput.value) {
-        actorInput.addEventListener("input", function () {
+    let timeout = null;
+    actorInput.addEventListener("input", function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
             const input = this.value.trim().toLowerCase();
-
+    
             // Filter the actors based on the input value
-            const matchingActors = actors_names.filter(actors_names => actors_names.toLowerCase().includes(input));
+            const matchingActors = actors_names.filter(actor_name => actor_name.toLowerCase().includes(input));
             updateActorSuggestions(matchingActors);
-        });
-    }
-
-    document.getElementById("search-btn").addEventListener("click", async function () {
-        const actorName = actorInput.value.trim(); //value entered in the search bar eg Brad Pitt
-        if (actorName) {
-
-            const principal_actor_id = actors_map[actorName] // id of the actor searched --> int 
-
-            const info_actor = info_dict[principal_actor_id] // {played_with_actor1:[film id 1, film id 2, ..], ..., own_movies:[...]}
-
-            var related_actor_ids =  info_actor["Played_with_ids"].slice()// get the ids of the actors he plays with
-            related_actor_ids.unshift(principal_actor_id) // we also want the id of the principal actor
-            var related_actor_names = related_actor_ids.map(id => getNameById(id, actors_map)); // the actors names
-
-            const size = related_actor_names.length
-            
-            const adjacencyMatrix = generateAdjacencyMatrix(size);
-            const actorsInfo = generateActorsInfo(size, related_actor_names, info_dict, actors_map, movies_map,movies_info_map);
-            const sharedMoviesMatrix = initializeSharedMoviesMatrix(size, related_actor_names, info_dict, actors_map, movies_map, principal_actor_id);
-<<<<<<< HEAD:project_js/script_real_test.js
-        
-            drawGraph(actorName, related_actor_names, adjacencyMatrix, actorsInfo, sharedMoviesMatrix);
-            displayActorInfo(actorName, actorsInfo);
-
-=======
-            drawGraph(actorName, related_actor_names, adjacencyMatrix, actorsInfo, sharedMoviesMatrix, movies_map, directors_map);
-            displayActorInfo(actorName, actorsInfo, movies_map, directors_map)
->>>>>>> e1f76de2448d3c5b72e7c02c3a232e15498b9ddf:project_js/script_milestone3.js
-        }
+        }, 500); // add a delay of 500 ms
     });
-    const timelineChartElement = document.getElementById("timeline-chart");
+
+    document.getElementById("node-slider").addEventListener("change", function() {
+        const actorName = actorInput.value.trim();
+
+        maxNodes = this.value ;
+        updateGraph(actorName, actors_map, info_dict, movies_map, movies_info_map, directors_map, actorPopularityMap);
+    });
+
+    searchBtn.addEventListener("click", function () {
+        const actorName = actorInput.value.trim();
+        if (actorName) {
+            const actorsInfo = updateGraph(actorName, actors_map, info_dict, movies_map, movies_info_map, directors_map, actorPopularityMap);
+            displayActorInfo(actorName, actorsInfo, movies_map, directors_map)
+        }
+    });  
+
+    // Set the default value
+    actorInput.value = "Heath Ledger";
+    // Trigger the click event
+    searchBtn.click();
+}
+
+
+function updateGraph(actorName, actors_map, info_dict, movies_map, movies_info_map, directors_map, actorPopularityMap){
+    const principal_actor_id = actors_map[actorName] 
+    const info_actor = info_dict[principal_actor_id] 
+    var related_actor_ids =  info_actor["Played_with_ids"].slice()
+    related_actor_ids.unshift(principal_actor_id)
+    var related_actor_names = related_actor_ids.map(id => getNameById(id, actors_map));
+
+    const size = related_actor_names.length
+    
+    const adjacencyMatrix = generateAdjacencyMatrix(size);
+    const actorsInfo = generateActorsInfo(size, related_actor_names, info_dict, actors_map, movies_map, movies_info_map);
+    const sharedMoviesMatrix = initializeSharedMoviesMatrix(size, related_actor_names, info_dict, actors_map, movies_map, principal_actor_id);
+    drawGraph(actorName, related_actor_names, adjacencyMatrix, actorsInfo, sharedMoviesMatrix, movies_map, directors_map, actorPopularityMap);
+
+    return actorsInfo;
 }
 
 function updateActorSuggestions(actors) {
@@ -643,8 +672,8 @@ function generateRandomAdjacencyMatrix(size) {
     return matrix;
   }
 
-function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo,sharedMoviesMatrix, movie_map, directors_map) {
-    const graphData = generateGraphData(actorName, actors, adjacencyMatrix);
+function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo,sharedMoviesMatrix, movie_map, directors_map,actorPopularityMap ) {
+    const graphData = generateGraphData(actorName, actors, adjacencyMatrix,actorPopularityMap );
 
     if (!graphData) {
         return;
@@ -680,7 +709,7 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo,sharedMoviesMa
     .enter()
     .append("circle")
     .attr("r", 20)
-    .attr("fill", (d, i) => i === 0 ? "#ff0000" : "#1f77b4");
+    .attr("fill", (d) => d.name === actorName ? "#ff0000" : "#1f77b4");
 
     // Add the click event listener to each node
     nodes.each(function (d) {
@@ -704,6 +733,7 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo,sharedMoviesMa
     }
 
     
+    const sharedMoviesScale = d3.scaleLinear().domain([1, 10]).range([200, 50]);
 
     
 
@@ -721,10 +751,10 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo,sharedMoviesMa
     // Set up the force simulation for the graph layout
     const simulation = d3.forceSimulation(graphData.nodes)
         .force("charge", d3.forceManyBody().strength(-300))
-        .force("link", d3.forceLink(graphData.links).distance(150))
+        .force("link", d3.forceLink(graphData.links).distance(d => sharedMoviesScale(d.sharedMovies)))
         .force("center", d3.forceCenter())
         .on("tick", ticked);
-
+  
     function ticked() {
         // Update the position of the nodes and links
         nodes.attr("cx", d => d.x).attr("cy", d => d.y);
@@ -735,6 +765,7 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo,sharedMoviesMa
         labels.attr("x", d => d.x).attr("y", d => d.y);
     }
 }
+
 function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
     const index = actors.indexOf(actor2);
 
@@ -749,7 +780,8 @@ function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
         `;
     }
 }
-function generateGraphData(actorName, actors, adjacencyMatrix) {
+
+function generateGraphData(actorName, actors, adjacencyMatrix, actorPopularityMap) {
     const actorIndex = actors.indexOf(actorName);
 
     if (actorIndex === -1) {
@@ -759,21 +791,47 @@ function generateGraphData(actorName, actors, adjacencyMatrix) {
     const nodes = [];
     const links = [];
 
-    for (let i = 0; i < actors.length; i++) {
-        if (adjacencyMatrix[actorIndex][i] === 1 || i === actorIndex) {
-            nodes.push({ name: actors[i] });
-        }
-    }
+    // Add the searched actor to the sortedActors array first
+    const sortedActors = [{
+        name: actorName,
+        sharedMovies: 0,
+        popularityRank: actorPopularityMap[actorName] || Infinity // Default rank as Infinity for actors not in the list
+    }];
 
-    for (let i = 0; i < actors.length; i++) {
-        if (adjacencyMatrix[actorIndex][i] === 1 && i !== actorIndex) {
-            links.push({
-                source: nodes.find(node => node.name === actorName),
-                target: nodes.find(node => node.name === actors[i]),
-            });
-        }
-    }
+    // Sort actors based on the number of shared movies with the search actor
+    const remainingActors = actors
+        .filter(actor => actor !== actorName) // Exclude the searched actor
+        .map((actor, index) => ({
+            name: actor,
+            sharedMovies: adjacencyMatrix[actorIndex][index],
+            popularityRank: actorPopularityMap[actor] || Infinity // Default rank as Infinity for actors not in the list
+        }))
+        .sort((a, b) => {
+            if (a.sharedMovies === b.sharedMovies) {
+                // If the sharedMovies are equal, sort by popularity rank
+                return a.popularityRank - b.popularityRank;
+            } else {
+                // Otherwise, sort by sharedMovies
+                return b.sharedMovies - a.sharedMovies;
+            }
+        })
+        .slice(0, maxNodes - 1); // Subtract 1 to leave room for the searched actor
 
+    sortedActors.push(...remainingActors);
+
+    sortedActors.forEach(sortedActor => {
+        nodes.push({ name: sortedActor.name });
+    });
+
+    sortedActors.forEach(sortedActor => {
+        const targetIndex = actors.indexOf(sortedActor.name);
+        if (adjacencyMatrix[actorIndex][targetIndex] === 1 && targetIndex !== actorIndex) {
+            const sourceNode = nodes.find((nodes) => nodes.name === actorName);
+            const targetNode = nodes.find((nodes) => nodes.name === sortedActor.name);
+            
+            links.push({ source: sourceNode, target: targetNode, sharedMovies: sortedActor.sharedMovies });
+        }
+    });
 
     return {
         nodes: nodes,
