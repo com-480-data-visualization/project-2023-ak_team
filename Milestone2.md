@@ -10,7 +10,7 @@ The nodes in the graph represent either actors or directors. When a node is clic
 
 ## Actors Interactive Informations
 
-Afterwards, by clicking on the actor's name located at the top right corner (e.g., Tom Cruise), you can access further details about them, including:
+Afterwards, by clicking on an actor's node on the grap , you can access further details about them, including:
 
 - A catalogue of movie posters and relevant information for all the movies he/she has acted in.
 - A radar chart showcasing the types of genres that have defined his/her career.
@@ -18,14 +18,14 @@ Afterwards, by clicking on the actor's name located at the top right corner (e.g
     
 ![image](https://user-images.githubusercontent.com/61150130/234244230-2b6752bb-3a6f-49dc-9b45-fab073e90ebe.png)
    
-The radar chart not only displays all the genres that the actor has been associated with but also serves as a filter button. You can select any of the genres (e.g., "Action") by clicking on it, and the movie poster catalogue will be filtered based on that genre (here you can see that "Rain Man" was removed and a new action movie was depicted). Furthermore, the density plot will highlight the selected genre, allowing you to view the distribution of that genre in the actor's career.
+The density not only displays all the genres that the actor has been associated with but also serves as a filter button. Using the legend of the plot you can select any of the genres (e.g., "Action") by clicking on it, and the movie poster catalogue will be filtered based on that genre (here you can see that "Rain Man" was removed and a new action movie was depicted). Furthermore, the density plot will highlight the selected genre, allowing you to view the distribution of that genre in the actor's career.
    
 ![image](https://user-images.githubusercontent.com/61150130/234244297-c293c240-cb87-4093-bcfc-81ba3674b629.png)
      
-We also want that when you hover your cursor over a movie in the catalogue, all other images will become blurry, and detailed information about the movie will appear on the right side of the movie poster. The information about the movie, including Language, Runtime, Release Date, Actors, Writer, Director, Genre, IMDb Rating, Box Office, Rated, and Awards, will be displayed one after the other on the right side of the movie poster when you hover your cursor over it.
+We also want that when you click on a movie in the catalogue to display interesting informations about the movie like the Language, Runtime, Release Date, Writer, Director, IMDb Rating, Box Office, Rated, and Awards
 
 # Tools and Lecture 
-- Creating a graph that links actors and directors:
+- Creating a graph that links actors and directors based on an adjacency matrix:
 
     Tools: D3.js, D3.forceSimulation (for creating a force-directed graph)
     
@@ -43,11 +43,6 @@ We also want that when you hover your cursor over a movie in the catalogue, all 
     
     Lectures: Interaction in D3.js, D3.js, Tabular Data
 
-- Time cursor for filtering movies by date:
-
-    Tools: D3.js (for creating a time slider and updating the visualization based on the selected date), HTML/CSS (for designing the time slider)
-    
-    Lectures: Interaction in D3.js, D3.js, Tabular Data
 
 - Adding a search bar for actors and directors:
 
@@ -60,51 +55,94 @@ We also want that when you hover your cursor over a movie in the catalogue, all 
     Tools: D3.js (for selecting colors and creating visual encodings), HTML/CSS (for designing the overall layout)
     
     Lectures: Perception Colors, Maps, Text Viz
-
-- Storytelling with your visualization:
-
-    Tools: D3.js (for creating interactive elements that guide users through the story)
     
-    Lectures: Storytelling
+    
+- Radar chart of genres:    
+    
+    Tools: Chart.js
+    
+    Lectures: Tabular data
+    
+- Distribution plot of the genres:
+
+    Tools: Chart.js, D3.js
+    
+    Lectures: Perception Colors, Interaction in D3.js, D3.js
+
+
 
 # Break down of the Project into independent pieces to implement
 
-- Parse and preprocess the data:
+To achieve our goal, we can break down the project into the following independent pieces:
 
-     Read in the list of movies, actors, and directors, and preprocess the data to create nodes and links.
+- Data preprocessing and formatting:
 
-- Create a force-directed graph:
+    Process and format the data into a structure that is suitable for visualization.
+    Extract actors, directors, movies, and genres as separate entities.
+    Establish relationships between actors, directors, movies, and genres.
+    In this case we are gonna create dictionnaries for each of the data quoted before to link them together for exemple a dictionnary for actors-to-actor graph with
+    keys being the id of the actors and the value the id of actors they played with.
 
-     Use D3.js to create a graph with nodes for actors and directors, and links between them based on their collaboration in movies.
+- Implement the search bar:
 
-- Implement interaction for displaying movie information:
+    Create an input field for users to type in the search query (actor/director name).
+    Implement a search functionality that filters actors/directors based on the input.
 
-    Add click event listeners to the links and display movie information, including posters, when a link is clicked.
 
-- Add filtering options for genre and date:
+- Create a central graph visualization:
 
-    Create buttons for filtering by genre and a time slider for filtering by date, and update the graph based on user selections.
+    Display the search result (actor/director) as the central node.
+    Connect the central node to related actors and directors based on the movies they have worked on together.
 
-- Implement a search bar for actors and directors:
 
-    Create an HTML input field for searching, add an event listener to handle user input, and filter the graph to show only the connections of the searched actor or        director.
+- Implement node selection and movie details display:
 
-- Apply visual design and aesthetics:
+    Add an event listener for node clicks.
+    When a node is clicked, display the movie titles and posters associated with the selected actor.
 
-    Choose appropriate colors, fonts, and visual encodings for your visualization, and design the overall layout using HTML/CSS.
 
-- Incorporate storytelling elements:
+- Create radar chart and density plot:
 
-    Add interactive elements that guide users through the story of the visualization, highlighting important connections and collaborations between actors and              directors.
-    
+    Create a density plot for the selected actor's movie genres over time.
+    Update both visualizations when a different node is clicked.
+
+
+- Implement the genre filter:
+
+    Create a dropdown or checkboxes to allow users to select a specific genre.
+    When a genre is selected, filter the movie posters displayed based on the chosen genre.
+    Update the density plot to highlight the selected genre.
+
+
+- Implement the actor/director switch button:
+
+    Create a toggle button to switch between searching for actors and directors.
+    Update the search functionality and graph visualization accordingly when the button is toggled.
+
+
+- Integrate all the components:
+
+    Combine all the above pieces to create a cohesive, interactive data visualization application.
+    Ensure smooth user interaction and transition between different components.
+
+
+- Testing and polishing:
+
+    Test the application to ensure all features work as expected.
+    Optimize performance and fix any bugs that arise.
+    Make any necessary adjustments to improve the user experience.
+
+
  # Extra Ideas
- 
+  
 Additionally, some more creative and challenging features could be:
   
+- Implement an easier search tool when looking for an actor / director that could automatically filled the search bar by filtering the actors / directors matching the current search input.
+- Make the graph more interactive by being able to generate the graph of an actor directly by clicking on the node of an actor.
 - Visually highlight connections between actors who have worked together in a movie that has either won or been nominated for an Oscar.
 Use a gold link to represent a movie that has won an Oscar, and a silver link to indicate a movie that has been nominated for an Oscar.
 Use something similar for other presitigious awards like Golden Globes or "La Palme d'Or" of Cannes.
-- Allow users to compare the career trajectories of two or more actors, displaying their respective movie catalogues side by side.
+- Allow users to compare the career trajectories of two or more actors, displaying their respective movie catalogues side by side. This could allow users to see popularity of actors known for having been in competition with each other, one can think of sylvester stallone and arnold schwarzenegger who during 1970-1985 competed to see who was the greatest action movie actor. 
 - Incorporate a feature that shows the actor's connections to other industries, such as their involvement in theater or television.
 - Use natural language processing to extract themes and motifs from movie summaries and reviews.
 Visually display these themes and motifs as word clouds.
@@ -115,4 +153,4 @@ These features may not be crucial to the overall meaning of the project, but the
 
 To see our javascript code: [Javascript Code](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2_js)
 
-To start the project, you need to search for actors in the search bar. The search bar should be used to find actor names in the form "Actor i" where i is a number between 1 to 10. All actors have played in the same movies for now, so searching for any of them will provide you with relevant information. Once you have found an actor, click on their node to access their information. You can scroll down the page to view the three graphs that have been mentioned for that particular actor. Additionally, by clicking on a movie poster, you can view more information about that movie. Remember to use the search bar to find the desired actors, and click on any nodes or movie posters to explore further information.
+To start the project, you need to search for actors in the search bar. For now we have only a example of the final product so the actors you can search for are named Actor 1, Actor 2... and are all associated with fake informations and random movies. Once you have found an actor, click on their node to access their information. You can scroll down the page to view the three graphs that have been mentioned for that particular actor. Additionally, by clicking on a movie poster, you can view more information about that movie. Again the informations about the movies are not relevant and does not correspond to the actual movie. Remember to use the search bar to find the desired actors, and click on any nodes or movie posters to explore further information.
