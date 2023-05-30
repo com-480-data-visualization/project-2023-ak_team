@@ -26,7 +26,9 @@ After creating a search bar to find specific actors, we moved to the implementat
 Implementing the radar chart and timeline density map presented its own set of challenges, especially the density timeline graph. Initially, we struggled with where to place a filter system for the movies. After several iterations, we settled on integrating the genre legend of the timeline chart as a filter button for the movie poster.
 
 You can see below what we wanted in Milestone 2 with these two graphs and what we ended up with:
-![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/553d3340-bbe4-443a-8d9c-4f6a29356443)
+
+
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/553d3340-bbe4-443a-8d9c-4f6a29356443" width="400" alt="Image">
 
 
 We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations.
