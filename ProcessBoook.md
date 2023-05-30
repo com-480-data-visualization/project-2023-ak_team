@@ -31,9 +31,13 @@ We also added listeners for interactive features. Clicking a link between two ac
 ## Addressing Overpopulation
 
 As we tested our visualization with popular actors like "Brad Pitt" and "Nicole Kidman", we noticed a glaring issue: the graph was overwhelmingly dense. Not only did it compromise the graph's readability, but it also significantly increased computational cost.
+
+
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e050387e-ec13-4347-ada9-cf32499b9e15)
 
 We decided to filter the graph based on a popularity criterion. Backtracking to our initial database, we ranked actors based on the number of connections they had. Our assumption was that an actor who had worked with many others was likely more "famous". The resulting list was fairly consistent with our expectations.
+
+
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e)
 
 ## Fine-tuning Interactivity
