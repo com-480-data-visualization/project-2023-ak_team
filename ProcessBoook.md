@@ -57,7 +57,7 @@ And here the genre filter that is applied to the movie posters and the density t
 
 
 
-We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the fact that this node click updates a lot of information, every graph and every movie poster, we were pleased with the fast and efficient updating of the visualizations. We also had a new feature that we only mention in milestone 2 that is when you double clik on an actor node, it will genreate it's own central graph with the predefine number of nodes linked to him.
+We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the fact that this node click updates a lot of information, every graph and every movie poster, we were pleased with the fast and efficient updating of the visualizations. We also had a new feature that we only mention in milestone 2 that is when you double clik on an actor node, it will generate it's own central graph with the predefine number of nodes linked to him.
 
 
 ### Addressing Overpopulation
