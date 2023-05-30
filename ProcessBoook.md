@@ -19,13 +19,19 @@ With our data in hand, the task then was to create dictionaries for quick inform
 
 The next step was to create the skeleton of our graph. However, upon completion, we realized the graph did not incorporate several important data points such as genres, awards, and box office information. This spurred us to rethink our strategy and consider other types of visualizations that could provide more nuanced insights into an actor's career. Our exploration led us to radar charts for genre representation and timeline density maps for illustrating the progression of an actor's career.
 
+You can see below what we wanted in Milestone 2 for the central graph visualisation and what we ended up with:
+
+
+![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/86c6db85-5442-452c-be13-cac7ebf8cca2)
+
+
 ## Implementing Interactive Features
 
 After creating a search bar to find specific actors, we moved to the implementation of movie poster visualization. Initial results were less promising due to the enormous file sizes of poster images and inconsistencies in their dimensions. We overcame these hurdles by defining a standard dimension for all images.
 
 Implementing the radar chart and timeline density map presented its own set of challenges, especially the density timeline graph. Initially, we struggled with where to place a filter system for the movies. After several iterations, we settled on integrating the genre legend of the timeline chart as a filter button for the movie poster.
 
-You can see below what we wanted in Milestone 2 with these two graphs and what we ended up with:
+You can see below what we wanted in Milestone 2 with these two new graphs and what we ended up with:
 
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/553d3340-bbe4-443a-8d9c-4f6a29356443">
