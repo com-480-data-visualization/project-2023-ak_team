@@ -60,7 +60,10 @@ And we then filter the graph with only the top famous rank that was connected to
 
 ## Fine-tuning Interactivity
 
-To accommodate the variation in the number of connections for different actors, we added a slider feature. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top 25 by adjusting the slider.
+To accommodate the variation in the number of connections for different actors, we added a slider feature just on top of the search bar. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top 25 by adjusting the slider.
+
+![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/5f417d6b-dcb3-4278-a35f-913e6e6f67da)
+
 
 We also had another features that was in the "Extra Idea" list of milestone 2 that is to implement an easier search tool when looking for an actor / director that could automatically filled the search bar by filtering the actors / directors matching the current search input.
 
