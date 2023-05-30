@@ -37,6 +37,7 @@ You can see below what we wanted in Milestone 2 with these two new graphs and wh
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/553d3340-bbe4-443a-8d9c-4f6a29356443">
 
+The design are identical, just the graphs arrangements are not the same, it made more sense to put it in this displacement based on size and informations logic.
 
 We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations.
 
