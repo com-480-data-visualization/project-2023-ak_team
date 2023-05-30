@@ -5,6 +5,7 @@ const infoActorPath = 'all_actors_info.json'
 const infoDirectorPath = 'all_directors_info.json'
 const moviesInfosPath = 'movie_info_map.json'
 const mostPopularActorPath = 'most_famous_actor.json'
+const mostPopularDirectorPath = 'most_famous_director.json'
 const directorsMoviesPath = 'directors_movies.json'
 
 async function readDirectorsFile(filePath) {
@@ -91,10 +92,10 @@ function processActorNames(actors_map) {
     return actors_names;
 }
 
-let maxNodes = 12; // Initial value
+let maxNodes = 20; // Initial value
 
 async function setup() {
-    const [actors_map, directors_map, directors_movies, movies_map, info_actor, info_director, movies_info_map, actorPopularityMap] = await Promise.all([
+    const [actors_map, directors_map, directors_movies, movies_map, info_actor, info_director, movies_info_map, actorPopularityMap, directorPopularityMap] = await Promise.all([
         readActorsFile(actorsPath),
         readDirectorsFile(directorsPath),
         readDirectorsMoviesFile(directorsMoviesPath),
@@ -102,7 +103,8 @@ async function setup() {
         readInfoActor(infoActorPath),
         readInfoDirector(infoDirectorPath),
         readMoviesInfosFile(moviesInfosPath),
-        readMoviesInfosFile(mostPopularActorPath)
+        readMoviesInfosFile(mostPopularActorPath),
+        readMoviesInfosFile(mostPopularDirectorPath)
     ]);
 
     const actors_names = processActorNames(actors_map);
@@ -112,11 +114,12 @@ async function setup() {
     const graphType = document.getElementById("graph-type");
 
     var graph_type = graphType.value;
-    var info_dict = graph_type.value === "actor" ? info_actor : info_director;
+    var info_dict = info_actor;
+    var popularityMap = actorPopularityMap;
 
     const updateAndDisplay = (actorName) => {
         if (actorName) {
-            const actorsInfo = updateGraph(actorName, actors_map, info_dict, movies_map, movies_info_map, directors_map, actorPopularityMap, graph_type);
+            const actorsInfo = updateGraph(actorName, actors_map, info_dict, movies_map, movies_info_map, directors_map, popularityMap, graph_type);
             displayActorInfo(actorName, actorsInfo, movies_map, directors_map);
         }
     };
@@ -134,7 +137,7 @@ async function setup() {
     graphType.addEventListener("change", function () {
         graph_type = this.value;
         info_dict = this.value === "actor" ? info_actor : info_director;
-        console.log(info_dict)
+        popularityMap = this.value === "actor" ? actorPopularityMap : directorPopularityMap;
         updateAndDisplay(actorInput.value.trim());
     });
 
@@ -159,11 +162,12 @@ function updateGraphWithInputs() {
     const graphTypeValue = document.getElementById("graph-type").value;
 
     // Determine info dictionary
-    var info_dict = graphTypeValue == "actor" ? info_actor : info_director;
+    var info_dict = info_actor;
+    var popularityMap = actorPopularityMap;
 
     // Update the graph
     if (actorName) {
-        const actorsInfo = updateGraph(actorName, actors_map, info_dict, movies_map, movies_info_map, directors_map, actorPopularityMap, graphTypeValue);
+        const actorsInfo = updateGraph(actorName, actors_map, info_dict, movies_map, movies_info_map, directors_map, popularityMap, graphTypeValue);
         displayActorInfo(actorName, actorsInfo, movies_map, directors_map);
     }
 }
