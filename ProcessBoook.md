@@ -103,6 +103,10 @@ We also had another features that was in the "Extra Idea" list of milestone 2 th
 To finish we added a default actor that we choose to be Heath Ledger to have a by-default graph when we launch the programm so the user don't arrive on a blank page.
 We also display all his infos and movie posters.
 
+### Modification of the Radar Chart
+
+In the end, we discussed with Professor Vuillon, he suggested to us to do a comparaison of genre between the search actor and the linked actors in the radar chart. We found the idea very interesting as it open a new dimension to our project, to compare the carrer of actor that played together. We can then respond to questions like "Did this actor played with other actor that was similar to him ? With the same carreer ?" or "I feel that this actor played in a lot of comedy movie, but is it more than average ?".
+
 ## Peer Assessment
 
 #### Part made by Aymeric Bacuet (297168)
