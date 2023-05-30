@@ -41,7 +41,7 @@ You can see below what we wanted in Milestone 2 with these two new graphs and wh
 
 The design are identical, just the graphs arrangements are not the same, it made more sense to put it in this displacement based on size and informations logic.
 
-We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations.
+We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations. We also had a new feature that we didn't mention in milestone 2 that is when you double clik on an actor node, it will genreate it's own central graph with the predefine number of nodes linked to him.
 
 
 ### Addressing Overpopulation
@@ -80,6 +80,7 @@ We also display all his infos and movie posters.
 
   - Creation of the central star graph based on the search actor and actors dictionnaries.
   - Implementation of the display of movie poster for the search or clicked actor.
+  - Implementation of listener based on click on nodes to display specific informations.
   - Implementation and creation of the famous ranking dictionnary.
   - Feature of filtering the graph based on this ranking.
   - Implementation of the node-slider to vary the number of nodes displayed.
@@ -89,7 +90,8 @@ We also display all his infos and movie posters.
 
   - Creation of most of the dictionnaries and information structure.
   - Creation of the search bar and the filtering feature of the search bar.
-  - Implementation of listener based on click on link and nodes to display specific informations.
+  - Implementation of listener based on click on links to display specific informations.
+  - Implementation of the double-click listener on actor node to create their own central graph.
   - Implementation of the radar chart of genre for clicked actor.
   - Implementation of the timeline genre chart and filter based on genre clicked for the movie poster.
   - Implementation of the display of movie infos when clicking on a movie poster.
