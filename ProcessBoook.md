@@ -38,16 +38,16 @@ We also added listeners for interactive features. Clicking a link between two ac
 
 As we tested our visualization with popular actors like "Brad Pitt" and "Nicole Kidman", we noticed a glaring issue: the graph was overwhelmingly dense. Not only did it compromise the graph's readability, but it also significantly increased computational cost.
 
-![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e050387e-ec13-4347-ada9-cf32499b9e15)
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e050387e-ec13-4347-ada9-cf32499b9e15">
 
 We decided to filter the graph based on a popularity criterion. Backtracking to our initial database, we ranked actors based on the number of connections they had. Our assumption was that an actor who had worked with many others was likely more "famous". The resulting list was fairly consistent with our expectations.
 
-![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e)
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e">
 
 
 And we then filter the graph with only the top famous rank that was connected to the search actor. So we have a clearer and far more interesting graph and it’s logical because people are mainly interested in connections and actors they know and these are in general the famous ones that we filtered. 
 
-![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364)
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364">
 
 
 ## Fine-tuning Interactivity
