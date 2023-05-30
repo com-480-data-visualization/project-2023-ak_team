@@ -56,5 +56,8 @@ To accommodate the variation in the number of connections for different actors, 
 
 We also had another features that was in the "to do" list of milestone 2 that is a filter search bar that based on the input you put, give you suggestion of actors that match your input:
 
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/715385c9-2806-47e9-9028-238ac37dda7f">
+
+
 
 
