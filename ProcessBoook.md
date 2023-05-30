@@ -94,3 +94,12 @@ We also display all his infos and movie posters.
   - Implementation of the timeline genre chart and filter based on genre clicked for the movie poster.
   - Implementation of the display of movie infos when clicking on a movie poster.
 
+
+### Part made together
+
+  - Search of the multiple dataset.
+  - Data Processsing.
+  - Dataframe merging and decision making.
+  - Brainstorming about new ideas to better vizualise movies informations.
+  - Optimization of the code.
+ 
