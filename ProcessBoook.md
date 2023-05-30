@@ -69,7 +69,7 @@ We returned to the initial database and ranked all the actors based on the numbe
 
 Next, we filtered the graph to display only the top-ranked actors who were connected to the searched actor. This resulted in a clearer and more captivating graph. It made logical sense since people are primarily interested in connections with actors they know, and these connections are typically with the more famous individuals. 
 
-<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364" width="500" alt="Image">
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/520d350c-3968-4dff-932b-9970b880e88f" width="500" alt="Image">
 
 This approach allowed us to present a more focused and engaging visualization, highlighting the connections that users are likely most interested in exploring.
 
