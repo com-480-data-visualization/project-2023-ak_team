@@ -32,8 +32,13 @@ We also added listeners for interactive features. Clicking a link between two ac
 
 As we tested our visualization with popular actors like "Brad Pitt" and "Nicole Kidman", we noticed a glaring issue: the graph was overwhelmingly dense. Not only did it compromise the graph's readability, but it also significantly increased computational cost.
 
+![image](https://user-images.githubusercontent.com/61150130/234244159-8c7fad11-1dda-4616-92a0-cc52cd813132.png)
+
 We decided to filter the graph based on a popularity criterion. Backtracking to our initial database, we ranked actors based on the number of connections they had. Our assumption was that an actor who had worked with many others was likely more "famous". The resulting list was fairly consistent with our expectations.
 
 ## Fine-tuning Interactivity
 
 To accommodate the variation in the number of connections for different actors, we added a slider feature. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top 25 by adjusting the slider.
+
+
+
