@@ -93,7 +93,7 @@ We also had another features that was in the "Extra Idea" list of milestone 2 th
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/715385c9-2806-47e9-9028-238ac37dda7f">
 
-To finish we had a default actor that we choose to be Heath Ledger to have a graph when we launch the programm and not just a blank page.
+To finish we added a default actor that we choose to be Heath Ledger to have a by-default graph when we launch the programm so the user don't arrive on a blank page.
 We also display all his infos and movie posters.
 
 ## Peer assessment
