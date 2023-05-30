@@ -42,12 +42,12 @@ As we tested our visualization with popular actors like "Brad Pitt" and "Nicole 
 
 We decided to filter the graph based on a popularity criterion. Backtracking to our initial database, we ranked actors based on the number of connections they had. Our assumption was that an actor who had worked with many others was likely more "famous". The resulting list was fairly consistent with our expectations.
 
-<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e">
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e" width="400" alt="400">
 
 
 And we then filter the graph with only the top famous rank that was connected to the search actor. So we have a clearer and far more interesting graph and it’s logical because people are mainly interested in connections and actors they know and these are in general the famous ones that we filtered. 
 
-<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364">
+<img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364" width="500" alt="Image">
 
 
 ## Fine-tuning Interactivity
