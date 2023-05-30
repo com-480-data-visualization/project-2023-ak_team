@@ -71,6 +71,26 @@ We also had another features that was in the "Extra Idea" list of milestone 2 th
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/715385c9-2806-47e9-9028-238ac37dda7f">
 
+To finish we had a default actor that we choose to be Heath Ledger to have a graph when we launch the programm and not just a blank page.
+We also display all his infos and movie posters.
 
 ## Peer assessment
+
+### Part made by Aymeric Bacuet (297168)
+
+  - Creation of the central star graph based on the search actor and actors dictionnaries.
+  - Implementation of the display of movie poster for the search or clicked actor.
+  - Implementation and creation of the famous ranking dictionnary.
+  - Feature of filtering the graph based on this ranking.
+  - Implementation of the node-slider to vary the number of nodes displayed.
+  - Default Actor when programm is launch.
+
+### Part made Kenji Tetard (301569)
+
+  - Creation of most of the dictionnaries and information structure.
+  - Creation of the search bar and the filtering feature of the search bar.
+  - Implementation of listener based on click on link and nodes to display specific informations.
+  - Implementation of the Radar Chart of genre for clicked actor.
+  - Implementation of the timeline genre chart and filter based on genre clicked for the movie poster.
+  - Implementation of the display of movie infos when clicking on a movie poster.
 
