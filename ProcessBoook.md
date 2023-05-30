@@ -36,8 +36,6 @@ This prompted us to rethink our project and explore alternative graphing techniq
 After some exploration, we decided to incorporate a radar chart to represent genres and a timeline density map to depict the trajectory of actors' careers. These new graph types offered a fresh perspective and allowed us to showcase a broader range of information, providing more detailed insights into the actors' professional journeys.
 
 
-
-
 ### Implementing Interactive Features
 
 We incorporated a search bar that allowed users to search for a specific actor. Additionally, we developed the movie poster visualization. However, we encountered some challenges during its implementation. Initially, we faced issues with the size of the files, as there were thousands of movie posters in JPEG format spanning from 1980 to 2015. Moreover, the images varied in size, making it difficult to achieve a consistent and aesthetically pleasing display. To address these challenges, we devised a solution that assigned a default dimension to all the images, ensuring uniformity and a optimal way to store the movie poster and made it quick to fetch them.
@@ -49,7 +47,7 @@ You can see below what we wanted in Milestone 2 with these two new graphs and wh
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/553d3340-bbe4-443a-8d9c-4f6a29356443">
 
-The design are identical, just the graphs arrangements are not the same, it made more sense to put it in this displacement based on size and informations logic.
+The design are identical, just the graphs arrangements is not the same, it made more sense to put it in this displacement based on size and informations logic.
 
 We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations. We also had a new feature that we didn't mention in milestone 2 that is when you double clik on an actor node, it will genreate it's own central graph with the predefine number of nodes linked to him.
 
@@ -69,18 +67,22 @@ To address this challenge, we needed to make a decision regarding the approach w
 
 We returned to the initial database and ranked all the actors based on the number of connections they had. Our assumption was that actors who had worked with a greater number of other actors were likely more "famous." We created a consistent list based on this ranking, with the top actors appearing at the beginning.
 
+
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e" width="400" alt="400">
 
 
 Next, we filtered the graph to display only the top-ranked actors who were connected to the searched actor. This resulted in a clearer and more captivating graph. It made logical sense since people are primarily interested in connections with actors they know, and these connections are typically with the more famous individuals. 
 
+
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/520d350c-3968-4dff-932b-9970b880e88f" width="500" alt="Image">
+
 
 This approach allowed us to present a more focused and engaging visualization, highlighting the connections that users are likely most interested in exploring.
 
 ### Fine-tuning Interactivity
 
 To accommodate the variation in the number of connections for different actors, we added a slider feature just on top of the search bar. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top maximum number of nodes by adjusting the slider.
+
 
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/5f417d6b-dcb3-4278-a35f-913e6e6f67da)
 
