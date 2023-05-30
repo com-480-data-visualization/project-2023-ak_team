@@ -50,7 +50,7 @@ You can see below what we wanted in Milestone 2 with these two new graphs and wh
 
 The design are identical, just the graphs arrangements is not the same, it made more sense to put it in this displacement based on size and informations logic.
 
-We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations. We also had a new feature that we only mention in milestone 2 that is when you double clik on an actor node, it will genreate it's own central graph with the predefine number of nodes linked to him.
+We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the fact that this node click updates a lot of information, every graph and every movie poster, we were pleased with the fast and efficient updating of the visualizations. We also had a new feature that we only mention in milestone 2 that is when you double clik on an actor node, it will genreate it's own central graph with the predefine number of nodes linked to him.
 
 
 ### Addressing Overpopulation
