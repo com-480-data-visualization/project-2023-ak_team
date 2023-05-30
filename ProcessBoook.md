@@ -25,11 +25,14 @@ To further enhance the retrieval process, we included an additional key for each
 
 We initially created the skeleton of the graph, but we encountered a challenge along the way. Towards the end of this phase, we realized that the graph we had constructed lacked informative value, as it didn't utilize a significant amount of data from our dataset such as genres, awards or box office information. This prompted us to rethink our project and explore alternative graphing techniques that could provide more nuanced insights into actors' careers.
 
+
+![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/cb9748ad-fd15-426c-be37-2fcc88f0eacc)
+
+
 After some exploration, we decided to incorporate a radar chart to represent genres and a timeline density map to depict the trajectory of actors' careers. These new graph types offered a fresh perspective and allowed us to showcase a broader range of information, providing more detailed insights into the actors' professional journeys.
 
 You can see below what we wanted in Milestone 2 for the central graph visualisation and what we ended up with:
 
-![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/cb9748ad-fd15-426c-be37-2fcc88f0eacc)
 
 As you can see the two design are quite similar, we dropped the idea of a time cursor because it wasn't very consitent to filter actor to actors link based on time because actors can collaborate multiple time together during their carreer and it was not very interesting as a feature. And as you are going to see below, we put the genre filter button in another place then at the top of the page.
 
