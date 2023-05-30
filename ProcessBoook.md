@@ -1,21 +1,23 @@
 # Process Book - Data Visualization
 
-## Conceptualization
+## Path, Challenges and Decisions
+
+### Conceptualization
 
 In our quest to explore the interconnected world of cinema, we were drawn towards the concept of displaying connections between actors who shared the screen either once or several times during their careers. The idea evolved into creating a star graph that could potentially illustrate the connections between directors, actors, and the films they've made together.
 
-## Data Collection
+### Data Collection
 Our first challenge emerged when we started looking for the necessary data. One database alone wasn't sufficient; each one we found had strengths and weaknesses. The first one provided a comprehensive list of movies but had very limited information on the actors involved. We found another database with a wealth of information on actors but lacking in detailed movie data.
 
 Our solution was to merge the two databases to construct a more complete picture. The journey took another interesting turn when we stumbled upon a third database, rich in movie posters. Unfortunately, not all our movies were represented in this database, and we were faced with a difficult decision: Should we only keep movies for which we had posters (which meant fewer movies), or keep all movies and accept that some wouldn't have associated posters?
 
 Given the course's focus on interactive visualization, we ultimately decided to limit our selection to only those movies for which we had posters.
 
-## Data Preparation
+### Data Preparation
 
 With our data in hand, the task then was to create dictionaries for quick information retrieval. We constructed an actor/director/movie map, with each entity's name as the key and their corresponding IDs as values. In addition, we created a secondary dictionary: all_movies_sample. This dictionary mapped actor IDs to the movies they had appeared in and the actors they had shared the screen with. Designing an optimal architecture for these dictionaries proved challenging but necessary.
 
-## Initial Visualization
+### Initial Visualization
 
 The next step was to create the skeleton of our graph. However, upon completion, we realized the graph did not incorporate several important data points such as genres, awards, and box office information. This spurred us to rethink our strategy and consider other types of visualizations that could provide more nuanced insights into an actor's career. Our exploration led us to radar charts for genre representation and timeline density maps for illustrating the progression of an actor's career.
 
@@ -26,7 +28,7 @@ You can see below what we wanted in Milestone 2 for the central graph visualisat
 
 As you can see the two design are quite similar, we dropped the idea of a time cursor because it wasn't very consitent to filter actor to actors link based on time because actors can collaborate multiple time together during their carreer and it was not very interesting as a feature. And as you are going to see below, we put the genre filter button in another place then at the top of the page.
 
-## Implementing Interactive Features
+### Implementing Interactive Features
 
 After creating a search bar to find specific actors, we moved to the implementation of movie poster visualization. Initial results were less promising due to the enormous file sizes of poster images and inconsistencies in their dimensions. We overcame these hurdles by defining a standard dimension for all images.
 
@@ -42,7 +44,7 @@ The design are identical, just the graphs arrangements are not the same, it made
 We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations.
 
 
-## Addressing Overpopulation
+### Addressing Overpopulation
 
 We were really happy with the code and visualization we had created so far. However, we faced some major problems. The first big issue was the excessive number of connections between well-known actors. This had two consequences. Firstly, it made the graph very hard to read. For example, when searching for actors like "Brad Pitt" or "Nicole Kidman," it became obvious that they had worked with numerous actors, resulting in a graph with an overwhelming number of nodes. As a result, it was impossible to understand anything from the graph, read the actor names, or even know which links to click. (like you can see in the graph below)
 
@@ -58,7 +60,7 @@ And we then filter the graph with only the top famous rank that was connected to
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364" width="500" alt="Image">
 
 
-## Fine-tuning Interactivity
+### Fine-tuning Interactivity
 
 To accommodate the variation in the number of connections for different actors, we added a slider feature just on top of the search bar. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top 25 by adjusting the slider.
 
@@ -70,5 +72,5 @@ We also had another features that was in the "Extra Idea" list of milestone 2 th
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/715385c9-2806-47e9-9028-238ac37dda7f">
 
 
-
+## Peer assessment
 
