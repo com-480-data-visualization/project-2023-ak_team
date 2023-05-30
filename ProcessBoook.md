@@ -25,18 +25,18 @@ To further enhance the retrieval process, we included an additional key for each
 
 We initially created the skeleton of the graph, but we encountered a challenge along the way. Towards the end of this phase, we realized that the graph we had constructed lacked informative value, as it didn't utilize a significant amount of data from our dataset such as genres, awards or box office information. 
 
+You can see below what we wanted in Milestone 2 for the central graph visualisation and what we ended up with: (and you can see why only this graph wasn't going to be sufficient at all)
 
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/cb9748ad-fd15-426c-be37-2fcc88f0eacc)
 
+But you can see that the two design are quite similar, we dropped the idea of a time cursor because it wasn't very consitent to filter actor to actors link based on time because actors can collaborate multiple time together during their carreer and it was not very interesting as a feature. And as you are going to see below, we put the genre filter button in another place then at the top of the page.
 
 This prompted us to rethink our project and explore alternative graphing techniques that could provide more nuanced insights into actors' careers.
 
 After some exploration, we decided to incorporate a radar chart to represent genres and a timeline density map to depict the trajectory of actors' careers. These new graph types offered a fresh perspective and allowed us to showcase a broader range of information, providing more detailed insights into the actors' professional journeys.
 
-You can see below what we wanted in Milestone 2 for the central graph visualisation and what we ended up with:
 
 
-As you can see the two design are quite similar, we dropped the idea of a time cursor because it wasn't very consitent to filter actor to actors link based on time because actors can collaborate multiple time together during their carreer and it was not very interesting as a feature. And as you are going to see below, we put the genre filter button in another place then at the top of the page.
 
 ### Implementing Interactive Features
 
@@ -80,7 +80,7 @@ This approach allowed us to present a more focused and engaging visualization, h
 
 ### Fine-tuning Interactivity
 
-To accommodate the variation in the number of connections for different actors, we added a slider feature just on top of the search bar. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top 25 by adjusting the slider.
+To accommodate the variation in the number of connections for different actors, we added a slider feature just on top of the search bar. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top maximum number of nodes by adjusting the slider.
 
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/5f417d6b-dcb3-4278-a35f-913e6e6f67da)
 
