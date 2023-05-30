@@ -20,3 +20,4 @@ Tetard Kenji | 301569 |
 
 ## 🎞️ Milestone 3
 ### 80% of the final grade
+[Milestone 3](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/ProcessBook.md)
