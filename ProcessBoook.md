@@ -31,7 +31,7 @@ You can see below what we wanted in Milestone 2 for the central graph visualisat
 
 But you can see that the two design are quite similar, we dropped the idea of a time cursor because it wasn't very consitent to filter actor to actors link based on time because actors can collaborate multiple time together during their carreer and it was not very interesting as a feature. And as you are going to see below, we put the genre filter button in another place then at the top of the page.
 
-This prompted us to rethink our project and explore alternative graphing techniques that could provide more nuanced insights into actors' careers.
+This lack of visual information of the main graph prompted us to rethink our project and explore alternative graphing techniques that could provide more nuanced insights into actors' careers.
 
 After some exploration, we decided to incorporate a radar chart to represent genres and a timeline density map to depict the trajectory of actors' careers. These new graph types offered a fresh perspective and allowed us to showcase a broader range of information, providing more detailed insights into the actors' professional journeys.
 
