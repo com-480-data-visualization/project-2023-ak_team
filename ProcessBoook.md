@@ -54,5 +54,7 @@ And we then filter the graph with only the top famous rank that was connected to
 
 To accommodate the variation in the number of connections for different actors, we added a slider feature. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top 25 by adjusting the slider.
 
+We also had another features that was in the "to do" list of milestone 2 that is a filter search bar that based on the input you put, give you suggestion of actors that match your input:
+
 
 
