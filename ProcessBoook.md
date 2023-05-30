@@ -47,6 +47,7 @@ You can see below what we wanted in Milestone 2 with these two new graphs and wh
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/553d3340-bbe4-443a-8d9c-4f6a29356443">
 
+
 The design are identical, just the graphs arrangements is not the same, it made more sense to put it in this displacement based on size and informations logic.
 
 We also added listeners for interactive features. Clicking a link between two actors would display shared movies, while clicking an actor node would refresh all the information about that actor. Despite the lengthy process, we were pleased with the fast, efficient updating of the visualizations. We also had a new feature that we didn't mention in milestone 2 that is when you double clik on an actor node, it will genreate it's own central graph with the predefine number of nodes linked to him.
@@ -59,6 +60,7 @@ At this stage, we were thrilled with the code and visualizations we had created.
 The second problem stemming from this issue was the computational cost. The sheer volume of actor connections, coupled with the display on the graph, significantly increased the execution time. Some actors took several minutes to process, which became a significant problem.
 
 Here is an example of the kind of graph we had:
+
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e050387e-ec13-4347-ada9-cf32499b9e15" width="500" alt="Image">
 
