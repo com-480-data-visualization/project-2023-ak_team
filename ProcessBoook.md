@@ -22,8 +22,9 @@ The next step was to create the skeleton of our graph. However, upon completion,
 You can see below what we wanted in Milestone 2 for the central graph visualisation and what we ended up with:
 
 
-![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/86c6db85-5442-452c-be13-cac7ebf8cca2)
+![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/cb9748ad-fd15-426c-be37-2fcc88f0eacc)
 
+As you can see the two design are quite similar, we dropped the idea of a time cursor because it wasn't very consitent to filter actor to actors link based on time because actors can collaborate multiple time together during their carreer and it was not very interesting as a feature.
 
 ## Implementing Interactive Features
 
