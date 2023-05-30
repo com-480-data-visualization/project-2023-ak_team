@@ -72,7 +72,7 @@ Here is an example of the kind of graph we had:
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e050387e-ec13-4347-ada9-cf32499b9e15" width="500" alt="Image">
 
 
-To address this challenge, we needed to make a decision regarding the approach we would take. We considered two options: either removing some "less" famous actors from the database to improve efficiency, or implementing a filter based on a popularity criteria. Ultimately, we opted for the latter solution.
+To address this challenge, we needed to make a decision regarding the approach we would take. We considered two options: either removing some "less" famous actors from the database to improve efficiency and clarity of the graph, or implementing a filter based on a popularity criteria. Ultimately, we opted for the latter solution.
 
 We returned to the initial database and ranked all the actors based on the number of connections they had. Our assumption was that actors who had worked with a greater number of other actors were likely more "famous." We created a list based on this ranking, with the top actors appearing at the beginning that seems consistent as you can see by the top 10 actors that we calculated that are all really famous acotrs:
 
