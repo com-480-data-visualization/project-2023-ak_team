@@ -103,7 +103,7 @@ We also had another features that was in the "Extra Idea" list of milestone 2 th
 To finish we added a default actor that we choose to be Heath Ledger to have a by-default graph when we launch the programm so the user don't arrive on a blank page.
 We also display all his infos and movie posters.
 
-## Peer assessment
+## Peer Assessment
 
 #### Part made by Aymeric Bacuet (297168)
 
