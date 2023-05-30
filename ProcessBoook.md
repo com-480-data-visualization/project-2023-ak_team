@@ -90,7 +90,7 @@ We also display all his infos and movie posters.
   - Creation of most of the dictionnaries and information structure.
   - Creation of the search bar and the filtering feature of the search bar.
   - Implementation of listener based on click on link and nodes to display specific informations.
-  - Implementation of the Radar Chart of genre for clicked actor.
+  - Implementation of the radar chart of genre for clicked actor.
   - Implementation of the timeline genre chart and filter based on genre clicked for the movie poster.
   - Implementation of the display of movie infos when clicking on a movie poster.
 
