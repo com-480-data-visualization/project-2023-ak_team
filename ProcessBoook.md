@@ -40,6 +40,12 @@ We decided to filter the graph based on a popularity criterion. Backtracking to 
 
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e)
 
+
+And we then filter the graph with only the top famous rank that was connected to the search actor. So we have a clearer and far more interesting graph and it’s logical because people are mainly interested in connections and actors they know and these are in general the famous ones that we filtered. 
+
+![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364)
+
+
 ## Fine-tuning Interactivity
 
 To accommodate the variation in the number of connections for different actors, we added a slider feature. This feature allows users to adjust the number of nodes displayed in the graph in real-time. By default, the top 10 most connected actors related to the searched actor are displayed. However, this can be expanded up to the top 25 by adjusting the slider.
