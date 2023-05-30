@@ -44,7 +44,7 @@ We also added listeners for interactive features. Clicking a link between two ac
 
 ## Addressing Overpopulation
 
-As we tested our visualization with popular actors like "Brad Pitt" and "Nicole Kidman", we noticed a glaring issue: the graph was overwhelmingly dense. Not only did it compromise the graph's readability, but it also significantly increased computational cost.
+We were really happy with the code and visualization we had created so far. However, we faced some major problems. The first big issue was the excessive number of connections between well-known actors. This had two consequences. Firstly, it made the graph very hard to read. For example, when searching for actors like "Brad Pitt" or "Nicole Kidman," it became obvious that they had worked with numerous actors, resulting in a graph with an overwhelming number of nodes. As a result, it was impossible to understand anything from the graph, read the actor names, or even know which links to click. (like you can see in the graph below)
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e050387e-ec13-4347-ada9-cf32499b9e15" width="500" alt="Image">
 
