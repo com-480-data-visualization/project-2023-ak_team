@@ -7,7 +7,7 @@
 In our quest to explore the interconnected world of cinema, we were drawn towards the concept of displaying connections between actors who shared the screen either once or several times during their careers. The idea evolved into creating a star graph that could potentially illustrate the connections between directors, actors, and the films they've made together.
 
 ### Data Collection
-Our first challenge emerged when we started looking for the necessary data. One database alone wasn't sufficient; each one we found had strengths and weaknesses. The first one provided a comprehensive list of movies but had very limited information on the actors involved. We found another database with a wealth of information on actors but lacking in detailed movie data.
+Our first challenge emerged when we started looking for the necessary data. One database alone wasn't sufficient; each one we found had strengths and weaknesses. The first one provided a comprehensive list of movies but had very limited information on the actors involved (each movies had only 2-3 main actors so our graph was very limited). We found another database with a lots of information on actors but lacking in detailed movie data.
 
 Our solution was to merge the two databases to construct a more complete picture. The journey took another interesting turn when we stumbled upon a third database, rich in movie posters. Unfortunately, not all our movies were represented in this database, and we were faced with a difficult decision: Should we only keep movies for which we had posters (which meant fewer movies), or keep all movies and accept that some wouldn't have associated posters?
 
@@ -15,14 +15,19 @@ Given the course's focus on interactive visualization, we ultimately decided to 
 
 ### Data Preparation
 
-With our data in hand, the task then was to create dictionaries for quick information retrieval. We constructed an actor/director/movie map, with each entity's name as the key and their corresponding IDs as values. In addition, we created a secondary dictionary: all_movies_sample. This dictionary mapped actor IDs to the movies they had appeared in and the actors they had shared the screen with. Designing an optimal architecture for these dictionaries proved challenging but necessary.
+We faced the task of creating dictionaries for future computations. One of the main challenges was to design an efficient architecture for each dictionary to ensure quick information retrieval. We successfully built three maps: one for actors, one for directors, and one for movies. These maps used the names of actors, directors, and movies as keys, respectively, and their corresponding IDs as values.
+
+In addition, we created the "all_actor_infos" map. In this map, actor IDs were used as keys, and the associated values were nested dictionaries. Each nested dictionary contained the IDs of the movies shared by the actors. This structure allowed us to easily retrieve the list of actors with whom a specific actor had worked.
+
+To further enhance the retrieval process, we included an additional key for each actor called "Played with ids." This key contained the IDs of all the actors the specific actor had collaborated with. The purpose was to quickly obtain the list of actors associated with a particular actor.
 
 ### Initial Visualization
 
-The next step was to create the skeleton of our graph. However, upon completion, we realized the graph did not incorporate several important data points such as genres, awards, and box office information. This spurred us to rethink our strategy and consider other types of visualizations that could provide more nuanced insights into an actor's career. Our exploration led us to radar charts for genre representation and timeline density maps for illustrating the progression of an actor's career.
+We initially created the skeleton of the graph, but we encountered a challenge along the way. Towards the end of this phase, we realized that the graph we had constructed lacked informative value, as it didn't utilize a significant amount of data from our dataset such as genres, awards or box office information. This prompted us to rethink our project and explore alternative graphing techniques that could provide more nuanced insights into actors' careers.
+
+After some exploration, we decided to incorporate a radar chart to represent genres and a timeline density map to depict the trajectory of actors' careers. These new graph types offered a fresh perspective and allowed us to showcase a broader range of information, providing more detailed insights into the actors' professional journeys.
 
 You can see below what we wanted in Milestone 2 for the central graph visualisation and what we ended up with:
-
 
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/cb9748ad-fd15-426c-be37-2fcc88f0eacc)
 
@@ -30,9 +35,9 @@ As you can see the two design are quite similar, we dropped the idea of a time c
 
 ### Implementing Interactive Features
 
-After creating a search bar to find specific actors, we moved to the implementation of movie poster visualization. Initial results were less promising due to the enormous file sizes of poster images and inconsistencies in their dimensions. We overcame these hurdles by defining a standard dimension for all images.
+We incorporated a search bar that allowed users to search for a specific actor. Additionally, we developed the movie poster visualization. However, we encountered some challenges during its implementation. Initially, we faced issues with the size of the files, as there were thousands of movie posters in JPEG format spanning from 1980 to 2015. Moreover, the images varied in size, making it difficult to achieve a consistent and aesthetically pleasing display. To address these challenges, we devised a solution that assigned a default dimension to all the images, ensuring uniformity and a optimal way to store the movie poster and made it quick to fetch them.
 
-Implementing the radar chart and timeline density map presented its own set of challenges, especially the density timeline graph. Initially, we struggled with where to place a filter system for the movies. After several iterations, we settled on integrating the genre legend of the timeline chart as a filter button for the movie poster.
+Subsequently, we focused on implementing the two previously mentioned graphs: the radar chart and the timeline density map. Implementing the density timeline graph posed a significant challenge, primarily because we wanted to incorporate a filter system for the movies associated with each actor. Initially, we considered an external scroll button where users could select a genre to filter the movies. However, we found that this button disrupted the overall aesthetics of the graphs. To overcome this, we made the decision to merge the genre legend of the timeline chart with the filter button for the movie posters. This integration proved to be a particularly challenging aspect of the implementation process.
 
 You can see below what we wanted in Milestone 2 with these two new graphs and what we ended up with:
 
@@ -46,19 +51,27 @@ We also added listeners for interactive features. Clicking a link between two ac
 
 ### Addressing Overpopulation
 
-We were really happy with the code and visualization we had created so far. However, we faced some major problems. The first big issue was the excessive number of connections between well-known actors. This had two consequences. Firstly, it made the graph very hard to read. For example, when searching for actors like "Brad Pitt" or "Nicole Kidman," it became obvious that they had worked with numerous actors, resulting in a graph with an overwhelming number of nodes. As a result, it was impossible to understand anything from the graph, read the actor names, or even know which links to click. (like you can see in the graph below)
+
+At this stage, we were thrilled with the code and visualizations we had created. However, we encountered some significant challenges. The first major issue arose from the high number of connections between certain well-known actors. This led to two consequences. Firstly, it severely impacted the graph's readability. For instance, when searching for actors like "Brad Pitt" or "Nicole Kidman," it became evident that they had worked with hundreds of other actors. As a result, the graph became overcrowded with numerous nodes, making it nearly impossible to understand or extract any meaningful information, read the names of actors, or discern which links to click. 
+The second problem stemming from this issue was the computational cost. The sheer volume of actor connections, coupled with the display on the graph, significantly increased the execution time. Some actors took several minutes to process, which became a significant problem.
+
+Here is an example of the kind of graph we had:
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e050387e-ec13-4347-ada9-cf32499b9e15" width="500" alt="Image">
 
-We decided to filter the graph based on a popularity criterion. Backtracking to our initial database, we ranked actors based on the number of connections they had. Our assumption was that an actor who had worked with many others was likely more "famous". The resulting list was fairly consistent with our expectations.
+
+To address this challenge, we needed to make a decision regarding the approach we would take. We considered two options: either removing some "less" famous actors from the database to improve efficiency, or implementing a filter based on a popularity criteria. Ultimately, we opted for the latter solution.
+
+We returned to the initial database and ranked all the actors based on the number of connections they had. Our assumption was that actors who had worked with a greater number of other actors were likely more "famous." We created a consistent list based on this ranking, with the top actors appearing at the beginning.
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/7282d5a2-8106-401a-9645-7b553d487a9e" width="400" alt="400">
 
 
-And we then filter the graph with only the top famous rank that was connected to the search actor. So we have a clearer and far more interesting graph and it’s logical because people are mainly interested in connections and actors they know and these are in general the famous ones that we filtered. 
+Next, we filtered the graph to display only the top-ranked actors who were connected to the searched actor. This resulted in a clearer and more captivating graph. It made logical sense since people are primarily interested in connections with actors they know, and these connections are typically with the more famous individuals. 
 
 <img src="https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/e885aca3-0ad5-4d0e-bd0e-1257fcf0b364" width="500" alt="Image">
 
+This approach allowed us to present a more focused and engaging visualization, highlighting the connections that users are likely most interested in exploring.
 
 ### Fine-tuning Interactivity
 
