@@ -105,7 +105,15 @@ We also display all his infos and movie posters.
 
 ### Modification of the Radar Chart
 
-In the end, we discussed with Professor Vuillon, he suggested to us to do a comparaison of genre between the search actor and the linked actors in the radar chart. We found the idea very interesting as it open a new dimension to our project, to compare the carrer of actor that played together. We can then respond to questions like "Did this actor played with other actor that was similar to him ? With the same carreer ?" or "I feel that this actor played in a lot of comedy movie, but is it more than average ?".
+As we progressed, we had the opportunity to discuss our project with Professor Vuillon, who provided valuable input. He suggested incorporating a comparison of genres between the search actor and the connected actors using a radar chart. We found this idea to be extremely intriguing, as it added a new dimension to our project: the ability to analyze and compare the careers of actors who have worked together.
+
+This addition opened up possibilities for addressing various questions such as, "Did this actor collaborate with others who had a similar career trajectory?" or "Did this actor participate in an unusually high number of comedy movies compared to the average?". The radar chart comparison allowed us to explore these inquiries and gain insights into the genre preferences and similarities between actors in their filmography.
+
+Here we can see Tom Cruise genre's distribution before and after the radar chart update:
+
+![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/9b27d6a6-ea66-41e5-8ceb-587c8f6d57de)
+
+So here we clearly see that he did more movies than the average of other actors, which is logical based on his prolific career. And far more drama and action movies which also make sense based on his filmography.
 
 ## Peer Assessment
 
