@@ -23,11 +23,13 @@ To further enhance the retrieval process, we included an additional key for each
 
 ### Initial Visualization
 
-We initially created the skeleton of the graph, but we encountered a challenge along the way. Towards the end of this phase, we realized that the graph we had constructed lacked informative value, as it didn't utilize a significant amount of data from our dataset such as genres, awards or box office information. This prompted us to rethink our project and explore alternative graphing techniques that could provide more nuanced insights into actors' careers.
+We initially created the skeleton of the graph, but we encountered a challenge along the way. Towards the end of this phase, we realized that the graph we had constructed lacked informative value, as it didn't utilize a significant amount of data from our dataset such as genres, awards or box office information. 
 
 
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/cb9748ad-fd15-426c-be37-2fcc88f0eacc)
 
+
+This prompted us to rethink our project and explore alternative graphing techniques that could provide more nuanced insights into actors' careers.
 
 After some exploration, we decided to incorporate a radar chart to represent genres and a timeline density map to depict the trajectory of actors' careers. These new graph types offered a fresh perspective and allowed us to showcase a broader range of information, providing more detailed insights into the actors' professional journeys.
 
