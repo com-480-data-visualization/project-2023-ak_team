@@ -69,7 +69,7 @@ function processActorNames(actors_map) {
     return actors_names;
 }
 
-let maxNodes = 12; // Initial value
+let maxNodes = 20; // Initial value
 
 // Set up event listener for the slider
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -269,6 +269,37 @@ function countMovieGenres(movies) {
 }
 function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
     const actor = actorsInfo[actorName];
+   
+    var list_actor_mean_genre = []
+
+    const keys = Object.keys(actorsInfo);
+    for (let index in keys) {
+    let actors = keys[index];
+    list_actor_mean_genre.push(countMovieGenres(actorsInfo[actors].listOfMovies))
+    // do something with actor
+    }
+    let genreSum = {}; // Object to store sum of each genre
+    let genreCount = {}; // Object to store count of each genre
+
+    for(let actor_genre of list_actor_mean_genre){
+        for(let genre in actor_genre){
+            if(genre in genreSum){
+                genreSum[genre] += actor_genre[genre]; // Add to sum
+                genreCount[genre] += 1; // Increment count
+            } else {
+                genreSum[genre] = actor_genre[genre]; // Initialize sum
+                genreCount[genre] = 1; // Initialize count
+            }
+        }
+    }
+
+    let genreMean = {};
+    for(let genre in genreSum){
+        genreMean[genre] = genreSum[genre] / genreCount[genre]; // Calculate mean
+    }
+
+    console.log("genre mean",genreMean)
+
     if (actor) {
         document.getElementById("actor-info").innerHTML = `
             <h2>${actorName}</h2>
@@ -280,7 +311,7 @@ function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
 
         // Count movie genres
         const genreCounts = countMovieGenres(actor.listOfMovies);
-
+        
         // Filter genreCounts to only include genres that the actor has played in
         const filteredGenreCounts = {};
         for (const [genre, count] of Object.entries(genreCounts)) {
@@ -289,8 +320,15 @@ function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
             }
         }
 
+        const filteredMeanGenreCounts = {};
+        for (const [genre, count] of Object.entries(genreMean)) {
+            if (count > 0) {
+                filteredMeanGenreCounts[genre] = count;
+            }
+        }
         // Create radar chart
-        drawRadarChart(filteredGenreCounts);
+        drawRadarChart(filteredGenreCounts,filteredMeanGenreCounts);
+
 
         // Make radar chart section visible
         document.getElementById("radar-chart-section").style.display = "block";
@@ -347,16 +385,19 @@ function displayMovieInfo(title, movie, movie_map, directors_map) {
 
 
 
-
-
-
-function drawRadarChart(genreCounts) {
+function drawRadarChart(genreCounts, MeanGenreCounts) {
     // Prepare data for radar chart
     const labels = Object.keys(genreCounts);
     const data = Object.values(genreCounts);
+    let meanData = [];
+
+    // For each genre in the genreCounts, find the corresponding mean value
+    for (let i = 0; i < labels.length; i++) {
+        meanData.push(MeanGenreCounts[labels[i]] || 0);
+    }
 
     // Calculate the maximum value for the radial scale
-    const maxValue = Math.max(...data);
+    const maxValue = Math.max(...data, ...meanData);
 
     // Clear existing chart if any
     const radarChartElement = document.getElementById("radar-chart");
@@ -370,10 +411,17 @@ function drawRadarChart(genreCounts) {
             labels: labels,
             datasets: [
                 {
-                    label: "Genre Distribution",
+                    label: "Actor's Genre Distribution",
                     data: data,
-                    backgroundColor: "rgba(76, 175, 80, 0.2)",
+                    backgroundColor: "rgba(76, 175, 80, 0.2)", // green color
                     borderColor: "rgba(76, 175, 80, 1)",
+                    borderWidth: 1,
+                },
+                {
+                    label: "Mean Genre Distribution",
+                    data: meanData,
+                    backgroundColor: "rgba(255, 0, 0, 0.2)", // red color
+                    borderColor: "rgba(255, 0, 0, 1)",
                     borderWidth: 1,
                 }
             ]
