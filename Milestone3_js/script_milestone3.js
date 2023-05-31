@@ -161,7 +161,6 @@ function updateGraphWithInputs() {
     const actorName = document.getElementById("actor-input").value.trim();
     const graphTypeValue = document.getElementById("graph-type").value;
 
-
     // Update the graph
     if (actorName) {
         const actorsInfo = updateGraph(actorName, actors_map, info_actor, info_director, movies_map, movies_info_map, directors_map, popularityMap, graphTypeValue);
@@ -199,23 +198,16 @@ function updateGraph(actorName, actors_map, info_actor, info_director, movies_ma
     const principal_actor_id = actors_map[actorName] 
     const principal_info_actor = infoActorOrDirector[principal_actor_id]
 
-
-    
-
     var related_actor_ids =  principal_info_actor["Played_with_ids"].slice()
-
-    related_actor_ids.unshift(principal_actor_id)
-
     var related_actor_names = related_actor_ids.map(id => getNameById(id, actorOrDirectorMap));
+
+    related_actor_names.unshift(getNameById(principal_actor_id, actors_map))
     const related_actor_size = related_actor_names.length
     
     const actorAdjacencyMatrix = generateAdjacencyMatrix(related_actor_size, graph_type);
-
     const actorsInfo = generateActorsInfo(related_actor_size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, actors_map, movies_map, movies_info_map);
-
-    
     const actorSharedMoviesMatrix = initializeActorSharedMoviesMatrix(related_actor_size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, movies_map, principal_actor_id);
-    console.log("actorSharedMoviesMatrix", actorSharedMoviesMatrix)
+    
     drawGraph(actorName, related_actor_names, actorAdjacencyMatrix, actorsInfo, actorSharedMoviesMatrix, movies_map, directors_map, actorPopularityMap, graph_type);
 
     return actorsInfo;
@@ -297,8 +289,11 @@ function getNameById(id, nameIdMapping) {
   function generateActorsInfo(size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, actors_map, movies_map, movie_info_map) {
     const actorsInfo = {};
 
+    var related_actor_names_unique = [...new Set(related_actor_names)];
+
+    console.log("related actor name:", related_actor_names_unique)
     for (let i = 0; i <= size; i++) {
-        const actorName = related_actor_names[i];
+        const actorName = related_actor_names_unique[i];
         const actorId = getIdByName(actorName, actorOrDirectorMap);
         
         const available_ids = Object.keys(infoActorOrDirector);
@@ -344,7 +339,8 @@ function countMovieGenres(movies) {
 }
 function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
     const actor = actorsInfo[actorName];
-
+    console.log("click node, actor name :", actor)
+    console.log("actor info:", actorsInfo)
     var list_actor_mean_genre = []
 
     const keys = Object.keys(actorsInfo);
@@ -801,14 +797,11 @@ function generateRandomAdjacencyMatrix(size) {
 
 function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesMatrix, movie_map, directors_map, actorPopularityMap, graph_type) {
     
-    console.log("Inside draw")
     
     const graphData = generateGraphData(actorName, actors, adjacencyMatrix, actorPopularityMap, graph_type );
-    console.log("pass generate")
 
-    console.log("graphData", graphData)
+
     if (!graphData) {
-        console.log("return since no graphData")
         return;
     }
 
@@ -917,7 +910,6 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
             .attr("y2", d => d.target.y);
         labels.attr("x", d => d.x).attr("y", d => d.y);
     }
-    console.log("end call draw")
 }
 
 function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
@@ -937,7 +929,6 @@ function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
 
 function generateGraphData(actorName, actors, adjacencyMatrix, actorPopularityMap, graph_type) {
   
-    console.log("adj matrix:", adjacencyMatrix)
     if (graph_type == "director"){
         actors.unshift(actorName);
 
@@ -983,7 +974,6 @@ function generateGraphData(actorName, actors, adjacencyMatrix, actorPopularityMa
     sortedActors.push(...remainingActors);
 
   
-    console.log("sorted actors:", sortedActors)
     sortedActors.forEach(sortedActor => {
         nodes.push({ name: sortedActor.name });
     });
@@ -993,10 +983,6 @@ function generateGraphData(actorName, actors, adjacencyMatrix, actorPopularityMa
         if (adjacencyMatrix[actorIndex][targetIndex] === 1 && targetIndex !== actorIndex) {
             const sourceNode = nodes.find((nodes) => nodes.name === actorName);
             const targetNode = nodes.find((nodes) => nodes.name === sortedActor.name);
-            console.log("target index:", targetIndex)
-            console.log("source node : ", sourceNode)
-            console.log("Target node : ", targetNode)
-
             
             links.push({ source: sourceNode, target: targetNode, sharedMovies: sortedActor.sharedMovies });
         }
