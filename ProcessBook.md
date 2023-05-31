@@ -113,7 +113,7 @@ Here we can see Tom Cruise genre's distribution before and after the radar chart
 
 ![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/9b27d6a6-ea66-41e5-8ceb-587c8f6d57de)
 
-So here we can clearly see that he did more movies than the average of other actors, which is logical based on his prolific career. And far more drama, action, thriller and adventure movies which also make sense based on his filmography.
+So here we can clearly see that Tom Cruise did more movies than the average of other actors, which is logical based on his prolific career. And far more drama, action, thriller and adventure movies which also make sense based on his filmography.
 
 ### Implementing the Director Connection Part
 
