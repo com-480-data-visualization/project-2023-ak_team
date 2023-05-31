@@ -115,6 +115,21 @@ Here we can see Tom Cruise genre's distribution before and after the radar chart
 
 So here we can clearly see that he did more movies than the average of other actors, which is logical based on his prolific career. And far more drama, action, thriller and adventure movies which also make sense based on his filmography.
 
+### Implementing the Director Connection Part
+
+Our initial assumption was that developing the Actor/Director switch button would be a straightforward task. This feature was designed to allow users to toggle between viewing the details of actors associated with a specific actor in our search, and the directors related to that same actor, providing an interactive and informative map. However, the process proved to be more challenging than anticipated.
+
+Our initial design and coding efforts were heavily tilted towards establishing actor-to-actor connections, under the assumption that creating director connections would follow a similar pattern. Therefore, we decided to address this task towards the end of our development phase.
+
+But to our surprise, the director connection wasn't as analogous to the actor connection as we had thought. The difference arose mainly because our initial code was tailored to situations where the primary node was an actor and the connected nodes were also actors. However, in the new scenario, the primary node was still an actor, but the connected nodes were directors.
+
+This shift posed significant complications. Since directors and actors were maintained in different dictionaries and had different data formats, our existing code was insufficient. We encountered several intricate issues related to this difference, making the task more challenging than we had initially imagined. We needed to change a lot of our functions to switch between directors infos map and actors infos map, and display the correct shared movies and correct filmography of the directors.
+
+But with some effort, we managed to make it work and got the final results:
+
+![image](https://github.com/com-480-data-visualization/project-2023-ak_team/assets/61150130/1bfa82e9-5d07-4a2b-a1a2-43541a40ceaf)
+
+
 ## Peer Assessment
 
 #### Part made by Aymeric Bacuet (297168)
