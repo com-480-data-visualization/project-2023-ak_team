@@ -120,7 +120,7 @@ async function setup() {
     const updateAndDisplay = (actorName) => {
         if (actorName) {
 
-            const actorsInfo = updateGraph(actorName, actors_map, info_actor, info_director, movies_map, movies_info_map, directors_map, popularityMap, graph_type);
+            const actorsInfo = updateGraph(actorName, actors_map, info_actor, info_director, movies_map, movies_info_map, directors_map, popularityMap, directors_movies, graph_type);
             displayActorInfo(actorName, actorsInfo, movies_map, directors_map);
         }
     };
@@ -183,7 +183,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-function updateGraph(actorName, actors_map, info_actor, info_director, movies_map, movies_info_map, directors_map, actorPopularityMap, graph_type){
+function updateGraph(actorName, actors_map, info_actor, info_director, movies_map, movies_info_map, directors_map, actorPopularityMap, directors_movies, graph_type){
     
     if (graph_type == "actor"){
         var actorOrDirectorMap = actors_map
@@ -205,7 +205,7 @@ function updateGraph(actorName, actors_map, info_actor, info_director, movies_ma
     const related_actor_size = related_actor_names.length
     
     const actorAdjacencyMatrix = generateAdjacencyMatrix(related_actor_size, graph_type);
-    const actorsInfo = generateActorsInfo(related_actor_size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, actors_map, movies_map, movies_info_map);
+    const actorsInfo = generateActorsInfo(related_actor_size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, actors_map, movies_map, movies_info_map, directors_movies, graph_type);
     const actorSharedMoviesMatrix = initializeActorSharedMoviesMatrix(related_actor_size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, movies_map, principal_actor_id);
     
     drawGraph(actorName, related_actor_names, actorAdjacencyMatrix, actorsInfo, actorSharedMoviesMatrix, movies_map, directors_map, actorPopularityMap, graph_type);
@@ -255,10 +255,15 @@ function generateAdjacencyMatrix(size, graph_type) {
 function initializeActorSharedMoviesMatrix(size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, movies_map, principal_actor_id) {
     const shared_matrix = [];
 
+    console.log("==========================Initialize share matrix =========================")
     for (let i = 1; i < size; i++) {
         const actorName = related_actor_names[i];
         const actorId = getIdByName(actorName, actorOrDirectorMap)
         
+        console.log("director i name: ", actorName)
+        console.log("director i id: ", actorId)
+        console.log("info:", infoActorOrDirector[principal_actor_id][actorId])
+        console.log("--------")
         shared_movies = infoActorOrDirector[principal_actor_id][actorId].map(m_id => getNameById(m_id, movies_map))
         shared_matrix.push(shared_movies);
         
@@ -286,21 +291,32 @@ function getNameById(id, nameIdMapping) {
     return null; // return null if the ID is not found in the mapping
   }
 
-  function generateActorsInfo(size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, actors_map, movies_map, movie_info_map) {
+  function generateActorsInfo(size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, actors_map, movies_map, movie_info_map, directors_movies, graph_type) {
     const actorsInfo = {};
-
     var related_actor_names_unique = [...new Set(related_actor_names)];
 
-    console.log("related actor name:", related_actor_names_unique)
     for (let i = 0; i <= size; i++) {
+        if (i == 0){
+            var corresponding_map = actors_map;
+        }
+        else{
+            var corresponding_map = actorOrDirectorMap;
+        }
         const actorName = related_actor_names_unique[i];
-        const actorId = getIdByName(actorName, actorOrDirectorMap);
+        const actorId = getIdByName(actorName, corresponding_map);
         
         const available_ids = Object.keys(infoActorOrDirector);
 
+
         if (actorId in available_ids){
-            var Own_movies_ids = infoActorOrDirector[actorId]["Own_movies"];
-            var Own_movies_title = infoActorOrDirector[actorId]["Own_movies"].map(m_id => getNameById(m_id, movies_map));
+            if ((graph_type == "actor") || (i == 0)){
+                var Own_movies_ids = infoActorOrDirector[actorId]["Own_movies"];
+                var Own_movies_title = infoActorOrDirector[actorId]["Own_movies"].map(m_id => getNameById(m_id, movies_map));
+            }
+            else{
+                var Own_movies_ids = directors_movies[actorId];
+                var Own_movies_title = directors_movies[actorId].map(m_id => getNameById(m_id, movies_map));
+            }
         }
         else{
             // Convert the hardcoded movie titles to movie IDs using movies_map
@@ -339,8 +355,6 @@ function countMovieGenres(movies) {
 }
 function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
     const actor = actorsInfo[actorName];
-    console.log("click node, actor name :", actor)
-    console.log("actor info:", actorsInfo)
     var list_actor_mean_genre = []
 
     const keys = Object.keys(actorsInfo);
