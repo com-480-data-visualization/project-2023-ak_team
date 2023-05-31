@@ -160,4 +160,5 @@ But with some effort, we managed to make it work and got the final results:
   - Dataframe merging and decision making.
   - Brainstorming about new ideas to better vizualise movies informations.
   - Optimization of the code.
+  - Implementation and change of the code with the directors map infos.
  
