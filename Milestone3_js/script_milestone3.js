@@ -840,6 +840,7 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
 
         links.each(function (d) {
             this.addEventListener("click", function () {
+                console.log("link listener",sharedMoviesMatrix)
                 displaySharedMoviesInfo(d.source.name, d.target.name, sharedMoviesMatrix, actors);
             });
         });
@@ -873,6 +874,7 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
             displayActorInfo(d.name, actorsInfo, movie_map, directors_map);
            
             if (d.name != actorName) {
+                console.log("node listener",sharedMoviesMatrix)
                 displaySharedMoviesInfo(actorName, d.name, sharedMoviesMatrix, actors);
             }
         });
@@ -927,7 +929,14 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
 }
 
 function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
-    const index = actors.indexOf(actor2);
+    var unique = actors.filter((value, index, array) => array.indexOf(value) === index);
+
+    const index = unique.indexOf(actor2);
+    console.log("actor1",actor1)
+    console.log("actor2",actor2)
+    console.log("actorrs",actors)
+
+    console.log("displaySharedMoviesInfo SMM",sharedMoviesMatrix)
 
     if (index !== -1) {
         const sharedMovies = sharedMoviesMatrix[index];
@@ -1007,6 +1016,5 @@ function generateGraphData(actorName, actors, adjacencyMatrix, actorPopularityMa
         links: links,
     };
 }
-
 
 
