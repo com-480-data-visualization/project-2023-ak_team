@@ -141,10 +141,16 @@ async function setup() {
         updateAndDisplay(actorInput.value.trim());
     });
 
+    document.getElementById("node-slider").addEventListener("input", function () {
+        // Update node count display
+        document.getElementById("node-count").textContent = `Node count: ${this.value}`;
+    });
+    
     document.getElementById("node-slider").addEventListener("change", function () {
         maxNodes = this.value;
         updateAndDisplay(actorInput.value.trim());
     });
+    
 
     searchBtn.addEventListener("click", function () {
         updateAndDisplay(actorInput.value.trim());
@@ -255,15 +261,10 @@ function generateAdjacencyMatrix(size, graph_type) {
 function initializeActorSharedMoviesMatrix(size, related_actor_names, infoActorOrDirector, actorOrDirectorMap, movies_map, principal_actor_id) {
     const shared_matrix = [];
 
-    console.log("==========================Initialize share matrix =========================")
     for (let i = 1; i < size; i++) {
         const actorName = related_actor_names[i];
         const actorId = getIdByName(actorName, actorOrDirectorMap)
         
-        console.log("director i name: ", actorName)
-        console.log("director i id: ", actorId)
-        console.log("info:", infoActorOrDirector[principal_actor_id][actorId])
-        console.log("--------")
         shared_movies = infoActorOrDirector[principal_actor_id][actorId].map(m_id => getNameById(m_id, movies_map))
         shared_matrix.push(shared_movies);
         
@@ -353,6 +354,9 @@ function countMovieGenres(movies) {
     }
     return genreCounts;
 }
+
+let last_sorted_val;
+
 function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
     const actor = actorsInfo[actorName];
     var list_actor_mean_genre = []
@@ -388,12 +392,10 @@ function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
             <p>Movies:</p>
             <div style="max-height: 400px; overflow-y: auto;">
                 <ul>
-                    ${actor.movie_title.map(title => `<li>${title.replace(/^\d+,\s*/g, '')}</li>`).join('')}
+                    ${actor.movie_title.sort().map(title => `<li>${title.replace(/^\d+,\s*/g, '')}</li>`).join('')}
                 </ul>
             </div>
         `;
-    
-    
 
         // Count movie genres
         const genreCounts = countMovieGenres(actor.listOfMovies);
@@ -401,7 +403,7 @@ function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
         // Filter genreCounts to only include genres that the actor has played in
         const filteredGenreCounts = {};
         for (const [genre, count] of Object.entries(genreCounts)) {
-            if (count > 0) {
+            if (count > 0 && genre != "Drama") {
                 filteredGenreCounts[genre] = count;
             }
         }
@@ -424,28 +426,94 @@ function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
         // Make timeline chart section visible
         document.getElementById("timeline-chart-section").style.display = "block";
 
+
         // Display movie images
-        const movieImagesContainer = document.getElementById("movie-chart");
-        movieImagesContainer.innerHTML = ""; // Clear existing images
+        function displaySortedMovies(sortBy) {
+            const movieImagesContainer = document.getElementById("movie-chart");
+            movieImagesContainer.innerHTML = ""; // Clear existing images
 
-        for (const [title, movie] of Object.entries(actor.listOfMovies)) {
-            const imgElement = document.createElement("img");
-            imgElement.src = "movie_poster_per_year/"+ movie.date + "/"+  movie.image;
-            imgElement.alt = title;
-            imgElement.style.width = "150px";
-            imgElement.style.height = "230px";
-            imgElement.style.margin = "10px";
 
-            // Add click event listener to display movie information
-            imgElement.addEventListener("click", function () {
-                displayMovieInfo(title, movie, movie_map, directors_map);
-            });
+            let sortedMovies;
 
-            movieImagesContainer.appendChild(imgElement);
+            switch (sortBy) {
+                case 'date':
+                    sortedMovies = Object.entries(actor.listOfMovies).sort((a, b) => a[1].date - b[1].date);
+                    last_sorted_val = 'date'
+                    break;
+                case 'imdbRating':
+                    sortedMovies = Object.entries(actor.listOfMovies).sort((a, b) => b[1].info.imdbRating - a[1].info.imdbRating);
+                    last_sorted_val = 'imdbRating'
+
+                    break;
+                case 'Runtime':
+                    sortedMovies = Object.entries(actor.listOfMovies).sort((a, b) => {
+                        const runtimeA = parseInt(a[1].info.Runtime.split(' ')[0]);
+                        const runtimeB = parseInt(b[1].info.Runtime.split(' ')[0]);
+                        return runtimeB - runtimeA;
+                    });
+                    last_sorted_val = 'Runtime'
+
+                    break;
+                case 'Box_office':
+                    sortedMovies = Object.entries(actor.listOfMovies).sort((a, b) => {
+                        const boxOfficeA = parseInt(a[1].info.Box_office.replace(/[^0-9.-]+/g,""));
+                        const boxOfficeB = parseInt(b[1].info.Box_office.replace(/[^0-9.-]+/g,""));
+                        return boxOfficeB - boxOfficeA;
+                    });
+                    last_sorted_val = 'Box_office'
+
+                    break;
+                default: 
+                    sortedMovies = Object.entries(actor.listOfMovies).sort(([title1, movie1], [title2, movie2]) => {
+                        let name1 = getNameById(parseInt(title1), movie_map);
+                        let name2 = getNameById(parseInt(title2), movie_map);
+                        return name1.localeCompare(name2);
+                    });
+                    last_sorted_val = 'alphabetical'
+
+                    break;
+            }
+
+            let firstMovieTitle = null;
+            let firstMovie = null;
+
+            for (const [title, movie] of sortedMovies) {
+                const imgElement = document.createElement("img");
+                imgElement.src = "movie_poster_per_year/"+ movie.date + "/"+  movie.image;
+                imgElement.alt = title;
+                imgElement.style.width = "150px";
+                imgElement.style.height = "230px";
+                imgElement.style.margin = "10px";
+
+                // Add click event listener to display movie information
+                imgElement.addEventListener("click", function () {
+                    displayMovieInfo(title, movie, movie_map, directors_map);
+                });
+
+                movieImagesContainer.appendChild(imgElement);
+
+                if (firstMovieTitle === null && firstMovie === null) {
+                    firstMovieTitle = title;
+                    firstMovie = movie;
+                }
+            }
+
+            // Make movie images section visible
+            document.getElementById("movie-images-container").style.display = "block";
+
+            // Display the first movie's information by default
+            if (firstMovieTitle !== null && firstMovie !== null) {
+                displayMovieInfo(firstMovieTitle, firstMovie, movie_map, directors_map);
+            }
         }
 
-        // Make movie images section visible
-        document.getElementById("movie-images-container").style.display = "block";
+        // Initial display of movies sorted by title
+        displaySortedMovies(last_sorted_val);
+
+        // Event listener for the sort-selector
+        document.getElementById("sort-selector").addEventListener("change", function() {
+            displaySortedMovies(this.value);
+        });
     }
 }
 
@@ -456,6 +524,7 @@ function displayMovieInfo(title, movie, movie_map, directors_map) {
         <h3>${getNameById(parseInt(title), movie_map)}</h3>
         <p>Director: ${movie.info.Director.map(d_id => getNameById(parseInt(d_id), directors_map))}</p>
         <p>Writer: ${movie.info.Writer}</p>
+        <p>Release Date: ${movie.date}</p>        
         <p>Runtime: ${movie.info.Runtime}</p>
         <p>Box_office: ${movie.info.Box_office}</p>
         <p>Language: ${movie.info.Language}</p>
@@ -552,7 +621,7 @@ function drawTimelineChart(movies) {
             'Comedy': "rgba(245, 130, 49, 1)",
             'Crime': "rgba(145, 30, 180, 1)",
             'Documentary': "rgba(66, 212, 244, 1)",
-            'Drama': "rgba(240, 50, 230, 1)",
+            //'Drama': "rgba(240, 50, 230, 1)",
             'Family': "rgba(128, 128, 128, 1)",
             'Fantasy': "rgba(210, 245, 60, 1)",
             'History': "rgba(250, 190, 190, 1)",
@@ -570,93 +639,95 @@ function drawTimelineChart(movies) {
             'Western': "rgba(255, 255, 255, 1)"
     };
     
-    // Calculate genre proportions for each movie
-    const genreProportions = {};
-    const years_list = []
-
+   
+    
+    // Calculate genre counts for each movie
+    const genreCounts = {};
+    const years_list = [];
+    const genre_list = []
+    
     for (const movie of Object.values(movies)) {
         const year = parseInt(movie.date);
+        if (!genreCounts[year]) {
+            genreCounts[year] = {};
+        }
+    
+        if (years_list.length === 0) {
+            years_list.push(year);
+            for (const genre of movie.genres) {
+                if(genre != "Drama"){
+                    if (!genreCounts[year][genre]) {
+                        genreCounts[year][genre] = 0;
+                        genre_list.push(genre)
+                    }
+                    genreCounts[year][genre]++;
+                }
 
-        if (!genreProportions[year]) {
-            if (years_list.length != 0){
-                prev_year = years_list.slice(-1)[0]
-                genreProportions[year] = Object.assign({}, genreProportions[prev_year]);
             }
-            else{
-                genreProportions[year] = {};
-                genreProportions[year]["sum"] = 0;
+        } else {
+            const last_year = Math.max(...years_list);
+            years_list.push(year);
+            genreCounts[year] = Object.assign({}, genreCounts[last_year])
+            for (const genre of movie.genres) {
+                if(genre != "Drama"){
+
+                    if (!genre_list.includes(genre)) {
+                        genreCounts[year][genre] = 0;
+                        genre_list.push(genre)
+
+                    } else {
+                        genreCounts[year][genre] = genreCounts[last_year][genre];
+                    }
+                    
+                    genreCounts[year][genre]++;
+                }
             }
         }
-        years_list.push(year)
-
-
-        for (const genre of movie.genres) {
-            if (!genreProportions[year][genre]) {
-                genreProportions[year][genre] = 0;
-            }
-            genreProportions[year]["sum"]++;
-            genreProportions[year][genre]++;
-        }
-
     }
+    
 
-    for (const year in genreProportions) {
-        if (genreProportions.hasOwnProperty(year)) {
-          const yearData = genreProportions[year];
-          const sum = yearData.sum;
-      
-          for (const genre in yearData) {
-            if (yearData.hasOwnProperty(genre) && genre !== 'sum') {
-              yearData[genre] /= sum;
-            }
-          }
-        }
-      }
-
-    let maxProportion = 0;
-    for (const yearData of Object.values(genreProportions)) {
+    let maxCount = 0;
+    for (const yearData of Object.values(genreCounts)) {
         for (const genre in yearData) {
-            if (yearData.hasOwnProperty(genre) && genre !== 'sum') {
-                maxProportion = Math.max(maxProportion, yearData[genre]);
+            if (yearData.hasOwnProperty(genre)) {
+                maxCount = Math.max(maxCount, yearData[genre]);
             }
         }
     }
-      
 
-    // Prepare data for line charts (genre distribution) and scatter chart (movie points)
     const lineChartDatasets = Object.entries(genreColorMap)
     .filter(([genre]) => {
         return Object.values(movies).some(movie => movie.genres.includes(genre));
     })
     .map(([genre, color], index) => {
-        const borderColor = color.replace(/[\d.]+\)$/g, '0.2)'); // Set the opacity to 20%
+        const borderColor = color.replace(/[\d.]+\)$/g, '0.3)'); // Set the opacity to 20%
         const fillColor = color.replace(/[\d.]+\)$/g, '0)');
         return {
             label: genre,
-            data: Object.entries(movies).map(([_, movie]) => {
+            data: Object.values(movies).map(movie => {
                 return {
                     x: parseInt(movie.date),
-                    y: genreProportions[parseInt(movie.date)][genre] || 0,
+                    y: genreCounts[parseInt(movie.date)][genre] || 0,
                     genre: genre
                 };
             }),
             backgroundColor: fillColor,
             borderColor: borderColor,
+            stepped: true, // Set the step property
             fill: false,
             tension: 0, // Set tension to 0 for straight lines
             showLine: true,
             pointRadius: 0, // Hide points on the line chart
-            opacity: 0.2 // Set initial opacity to 0.2
+            opacity: 0.3 // Set initial opacity to 0.2
         };
     });
-
 
     const scatterChartDataset = {
         label: "Movies",
         data: Object.values(movies).map(movie => {
             return {
                 x: parseInt(movie.date),
-                y: 0
+                y: 0,
             };
         }),
         backgroundColor: "#000",
@@ -688,19 +759,24 @@ function drawTimelineChart(movies) {
                 y: {
                     type: "linear",
                     min: 0,
-                    max: maxProportion, // Set the maximum value for the y-axis
+                    max: maxCount, // Set the maximum value for the y-axis
                     title: {
                         display: true,
-                        text: "Genre Proportion"
-                    },
-                    ticks: {
-                        callback: function (value) {
-                            return (value * 100).toFixed(0) + '%';
-                        }
+                        text: "Genre Count"
                     }
                 }
             },
             plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            console.log(ctx);
+                            let label = ctx.dataset.labels[ctx.dataIndex];
+                            label += " (" + ctx.parsed.x + ", " + ctx.parsed.y + ")";
+                            return label;
+                        }
+                    }
+                },
                 legend: {
                     position: "top",
                     onClick: function (e, legendItem) {
@@ -746,35 +822,15 @@ function drawTimelineChart(movies) {
                     text: 'Timeline of Movies and Genre Proportions'
                 }
                 
-            },
-            tooltips: {
-                callbacks: {
-                    label: function (tooltipItem) {
-                        const dataset = tooltipItem.dataset;
-                        if (dataset.label === 'Movies') {
-                            const movieIndex = tooltipItem.dataIndex;
-                            return movies[movieIndex].title;
-                        } else {
-                            const genre = dataset.label;
-                            const proportion = (tooltipItem.parsed.y * 100).toFixed(0);
-                            return `${genre}: ${proportion}%`;
-                        }
-                    },
-                    title: function (tooltipItems) {
-                        if (tooltipItems[0].dataset.label === 'Movies') {
-                            const movieIndex = tooltipItems[0].dataIndex;
-                            return movies[movieIndex].title;
-                        } else {
-                            return "";
-                        }
-                    }
-                }
             }
+            
+            
         }        
     });
 }
 
 function filterMovieCovers(movies, selectedGenres) {
+    console.log("selected genres :", selectedGenres )
     const movieImagesContainer = document.getElementById("movie-images-container");
     const images = movieImagesContainer.getElementsByTagName("img");
 
@@ -786,7 +842,7 @@ function filterMovieCovers(movies, selectedGenres) {
         const movieInSelectedGenres = movie.genres.some(genre => selectedGenres.includes(genre));
 
         // If no genres are selected or the movie belongs to a selected genre, display the movie poster
-        img.style.display = (selectedGenres.length === 0 || movieInSelectedGenres) ? "inline-block" : "none";
+        img.style.display = (selectedGenres.length === 1 || movieInSelectedGenres) ? "inline-block" : "none";
     }
 }
 
@@ -840,13 +896,12 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
 
         links.each(function (d) {
             this.addEventListener("click", function () {
-                console.log("link listener",sharedMoviesMatrix)
                 displaySharedMoviesInfo(d.source.name, d.target.name, sharedMoviesMatrix, actors);
             });
         });
     // Create nodes (circles) for each actor
-    actor_color = "#1f77b4"
-    director_color = "green"
+    actor_color = "#8c90d1"
+    director_color = "#73b379"
     principale_actor_color = "#ff0000"
 
     if (graph_type == "actor"){
@@ -874,7 +929,6 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
             displayActorInfo(d.name, actorsInfo, movie_map, directors_map);
            
             if (d.name != actorName) {
-                console.log("node listener",sharedMoviesMatrix)
                 displaySharedMoviesInfo(actorName, d.name, sharedMoviesMatrix, actors);
             }
         });
@@ -908,7 +962,9 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
         .attr("dy", ".3em")
         .text(d => d.name)
         .style("font-size", "12px")
-        .style("font-weight", "bold");
+        .style("font-weight", "bold")
+        .style("fill", "#0");  // Changed font color to white to contrast with the dark background
+
 
     // Set up the force simulation for the graph layout
     const simulation = d3.forceSimulation(graphData.nodes)
@@ -932,11 +988,7 @@ function displaySharedMoviesInfo(actor1, actor2, sharedMoviesMatrix, actors) {
     var unique = actors.filter((value, index, array) => array.indexOf(value) === index);
 
     const index = unique.indexOf(actor2);
-    console.log("actor1",actor1)
-    console.log("actor2",actor2)
-    console.log("actorrs",actors)
 
-    console.log("displaySharedMoviesInfo SMM",sharedMoviesMatrix)
 
     if (index !== -1) {
         const sharedMovies = sharedMoviesMatrix[index];

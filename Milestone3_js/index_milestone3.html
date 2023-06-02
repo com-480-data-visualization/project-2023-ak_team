@@ -12,6 +12,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <body>
+        <div class="title">
+            <h1>Interactive Networks in the Film Universe</h1>
+        </div>
+        <div id="content">
     <div id="content">
         <label for="node-slider">Max Nodes:</label>
         <input type="range" min="1" max="50" value="20" id="node-slider">
@@ -46,6 +51,13 @@
         <div class="wrapper1">
             <div id="movie-images-container" class = chart-container style="display:none;">
                 <h3>Movie's covers</h3>
+                <select id="sort-selector">
+                    <option value="alphabetical">Alphabetical</option>
+                    <option value="date">Release Date</option>
+                    <option value="imdbRating">ImdbRating</option>
+                    <option value="Runtime">Duration</option>
+                    <option value="Box_office">Box Office</option>
+                </select>
                 <div id="movie-chart" class="movie-chart"></div>
             </div>
             <div id="info-movie">
