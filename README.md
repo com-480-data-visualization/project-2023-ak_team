@@ -9,6 +9,7 @@ Tetard Kenji | 301569 |
 # 🎬 Milestones
 
 Milestone 1 can be found [here](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone1.md) 
+
 Milestone 2 can be found [here](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2.md)
 Milestone 3 can be found [here](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2.md)
 
