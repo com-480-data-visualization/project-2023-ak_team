@@ -1,8 +1,8 @@
-const actorsPath = 'map_actors.json';
-const directorsPath = 'map_directors.json';
-const moviesPath = 'map_movies.json';
-const infoDictPath = 'all_movies_sample.json'
-const moviesInfosPath = 'movie_info_map.json'
+const actorsPath = '/Datasets/map_actors.json';
+const directorsPath = '/Datasets/map_directors.json';
+const moviesPath = '/Datasets/map_movies.json';
+const infoDictPath = '/Datasets/all_movies_sample.json'
+const moviesInfosPath = '/Datasets/movie_info_map.json'
 
 async function readDirectorsFile(filePath) {
     try {

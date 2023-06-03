@@ -1,12 +1,12 @@
-const actorsPath = 'map_actors.json';
-const directorsPath = 'map_directors.json';
-const moviesPath = 'map_movies.json';
-const infoActorPath = 'all_actors_info.json'
-const infoDirectorPath = 'all_directors_info.json'
-const moviesInfosPath = 'movie_info_map.json'
-const mostPopularActorPath = 'most_famous_actor.json'
-const mostPopularDirectorPath = 'most_famous_director.json'
-const directorsMoviesPath = 'directors_movies.json'
+const actorsPath = './datasets/map_actors.json';
+const directorsPath = './datasets/map_directors.json';
+const moviesPath = './datasets/map_movies.json';
+const infoActorPath = './datasets/all_actors_info.json'
+const infoDirectorPath = './datasets/all_directors_info.json'
+const moviesInfosPath = './datasets/movie_info_map.json'
+const mostPopularActorPath = './datasets/most_famous_actor.json'
+const mostPopularDirectorPath = './datasets/most_famous_director.json'
+const directorsMoviesPath = './datasets/directors_movies.json'
 
 async function readDirectorsFile(filePath) {
     try {
@@ -360,12 +360,12 @@ let last_sorted_val;
 function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
     const actor = actorsInfo[actorName];
     var list_actor_mean_genre = []
-
+    console.log("actor info: ", actorsInfo)
     const keys = Object.keys(actorsInfo);
-    for (let index in keys) {
-    let actors = keys[index];
-    list_actor_mean_genre.push(countMovieGenres(actorsInfo[actors].listOfMovies))
-    // do something with actor
+
+    for (let index in keys.slice(0, maxNodes)) {
+        let actors = keys[index];
+        list_actor_mean_genre.push(countMovieGenres(actorsInfo[actors].listOfMovies))
     }
     let genreSum = {}; // Object to store sum of each genre
     let genreCount = {}; // Object to store count of each genre
@@ -410,7 +410,7 @@ function displayActorInfo(actorName, actorsInfo, movie_map, directors_map) {
 
         const filteredMeanGenreCounts = {};
         for (const [genre, count] of Object.entries(genreMean)) {
-            if (count > 0) {
+            if (count > 0 && genre != "Drama") {
                 filteredMeanGenreCounts[genre] = count;
             }
         }
@@ -544,18 +544,24 @@ function displayMovieInfo(title, movie, movie_map, directors_map) {
 
 function drawRadarChart(genreCounts, MeanGenreCounts) {
     // Prepare data for radar chart
+
+
     const labels = Object.keys(genreCounts);
     const data = Object.values(genreCounts);
+    const total_data_count = data.reduce((partialSum, a) => partialSum + a, 0)
+
+    const data_normalized = data.map(a => a / total_data_count)
+
     let meanData = [];
 
     // For each genre in the genreCounts, find the corresponding mean value
     for (let i = 0; i < labels.length; i++) {
         meanData.push(MeanGenreCounts[labels[i]] || 0);
     }
+    const total_meandata_count = meanData.reduce((partialSum, a) => partialSum + a, 0)
+    const meandata_normalized = meanData.map(a => a / total_meandata_count)
 
-    // Calculate the maximum value for the radial scale
-    const maxValue = Math.max(...data, ...meanData);
-
+    var maxValue = Math.max(...data_normalized, ...meandata_normalized)
     // Clear existing chart if any
     const radarChartElement = document.getElementById("radar-chart");
     radarChartElement.innerHTML = "<canvas></canvas>";
@@ -568,15 +574,15 @@ function drawRadarChart(genreCounts, MeanGenreCounts) {
             labels: labels,
             datasets: [
                 {
-                    label: "Actor's Genre Distribution",
-                    data: data,
+                    label: "Selected Actor's Genre Distribution",
+                    data: data_normalized,
                     backgroundColor: "rgba(76, 175, 80, 0.2)", // green color
                     borderColor: "rgba(76, 175, 80, 1)",
                     borderWidth: 1,
                 },
                 {
-                    label: "Mean Genre Distribution of the other actors",
-                    data: meanData,
+                    label: "Average Genre Distribution of other displayed actors",
+                    data: meandata_normalized,
                     backgroundColor: "rgba(255, 0, 0, 0.2)", // red color
                     borderColor: "rgba(255, 0, 0, 1)",
                     borderWidth: 1,
@@ -587,14 +593,14 @@ function drawRadarChart(genreCounts, MeanGenreCounts) {
             scales: {
                 r: {
                     min: 0,                    
-                    max: maxValue+1, // Set the maximum value for the radial scale
+                    max: maxValue, // Set the maximum value for the radial scale
                     beginAtZero: true,
                     angleLines: {
                         display: false // Hides the labels around the radar chart
                     },
                     ticks: {
                         display: false, // Hide the integer labels of the indentation lines
-                        stepSize: 1,
+                        stepSize: maxValue / 5,
                     }
                 }
             },
@@ -892,7 +898,7 @@ function drawGraph(actorName, actors, adjacencyMatrix, actorsInfo, sharedMoviesM
         .append("line")
         .style("stroke", "#999")
         .style("stroke-opacity", 0.6)
-        .style("stroke-width", 4.5);
+        .style("stroke-width", 6);
 
         links.each(function (d) {
             this.addEventListener("click", function () {

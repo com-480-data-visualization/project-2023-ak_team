@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="/favicon.ico" type="image/x-icon" rel="icon" />
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actor Connections</title>
@@ -11,7 +13,8 @@
 </head>
 <body>
     <div id="content">
-        <input type="text" id="actor-input" placeholder="Enter actor name">
+        <input list="actors-list" id="actor-input" type="text" placeholder="Search for an actor" />
+        <datalist id="actors-list"></datalist>
         <button id="search-btn">Search</button>
         <div class="wrapper1">
             <div id="graph"></div>
@@ -39,7 +42,6 @@
                 <h3>Movie's infos</h3>
                 <div id="movie-info" class="movie-info-chart" style="display:none;"></div>
             </div>
-
         </div>
         
     </div>
