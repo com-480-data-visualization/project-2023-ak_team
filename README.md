@@ -12,8 +12,6 @@ Milestone 1 can be found [here](https://github.com/com-480-data-visualization/pr
 
 Milestone 2 can be found [here](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2.md)
 
-Milestone 3 can be found [here](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/Milestone2.md)
-
 Here is a link to our [website](https://kenjitet.github.io/index.html).
 
 Here is the [Process Book](https://github.com/com-480-data-visualization/project-2023-ak_team/blob/master/ProcessBook.pdf)
